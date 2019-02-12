@@ -1,5 +1,0 @@
-# hexo robots.txt
-
-Sitemap: http://xiongyunqiao.cn/sitemap.html
-Sitemap: http://xiongyunqiao.cn/sitemap.xml
-
