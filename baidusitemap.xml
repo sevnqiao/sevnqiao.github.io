@@ -3,19 +3,25 @@
 
 
     
-    
   <url>
-    <loc>https://sevnqiao.github.io/2016/09/20/cjs18cee8000ecrwdx2zlssvg/</loc>
-    <lastmod>2019-02-12T02:11:20.770Z</lastmod>
+    <loc>https://sevnqiao.github.io/2017/11/29/cjs1fje580009y1wdnn0hyymu/</loc>
+    <lastmod>2019-02-12T07:07:03.947Z</lastmod>
     <data>
         <display>
-        <title>如何让Xcode8支持iOS6和iOS7?</title>
-        <pubTime>2016-09-20T08:44:25.000Z</pubTime>
+        <title>wap 唤起App 的两种方式Schema & Universal Link</title>
+        <pubTime>2017-11-29T06:48:18.000Z</pubTime>
         
+        <tag>iOS</tag>
+         
+        <tag>Universal Link</tag>
+         
          
            
              
-              <breadCrumb title="项目实际" url="https://sevnqiao.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E9%99%85/"/>
+              <breadCrumb title="iOS" url="https://sevnqiao.github.io/categories/iOS/"/>
+          
+             
+              <breadCrumb title="Universal Link" url="https://sevnqiao.github.io/categories/iOS/Universal-Link/"/>
           
         </display>
     </data>
@@ -23,53 +29,15 @@
 
     
   <url>
-    <loc>https://sevnqiao.github.io/2017/08/25/cjs18ceiv000ycrwdyyymmift/</loc>
-    <lastmod>2017-08-25T08:28:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>ChartView折线图+饼状图</title>
-        <pubTime>2017-08-25T07:36:29.000Z</pubTime>
-        
-        <tag>CALyer,UIBeziaPath</tag>
-         
-         
-           
-             
-              <breadCrumb title="CALyer,UIBeziaPath" url="https://sevnqiao.github.io/categories/CALyer-UIBeziaPath/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://sevnqiao.github.io/2017/08/21/cjs18cedv0001crwdwbttvgef/</loc>
-    <lastmod>2017-08-22T02:18:02.000Z</lastmod>
-    <data>
-        <display>
-        <title>iOS9之前collectionView拖拽重排的实现</title>
-        <pubTime>2017-08-21T09:11:12.000Z</pubTime>
-        
-        <tag>collectionView编辑</tag>
-         
-         
-           
-             
-              <breadCrumb title="CollectionView" url="https://sevnqiao.github.io/categories/CollectionView/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://sevnqiao.github.io/2017/07/21/cjs18ceea000gcrwdxq9m73kz/</loc>
-    <lastmod>2017-08-01T03:01:35.000Z</lastmod>
+    <loc>https://sevnqiao.github.io/2017/07/21/cjs1fje5i000ly1wd9l1zzvcx/</loc>
+    <lastmod>2019-02-12T07:05:12.101Z</lastmod>
     <data>
         <display>
         <title>立个flag</title>
         <pubTime>2017-07-21T02:09:47.000Z</pubTime>
         
+        <tag>闲谈人生</tag>
+         
          
            
              
@@ -81,132 +49,277 @@
 
     
   <url>
-    <loc>https://sevnqiao.github.io/2015/05/25/cjs18ceix000zcrwdotdjx982/</loc>
-    <lastmod>2017-08-01T01:54:04.000Z</lastmod>
-    <data>
-        <display>
-        <title>利用runtime解决数组字典的崩溃问题</title>
-        <pubTime>2015-05-25T12:28:20.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="RunTime" url="https://sevnqiao.github.io/categories/RunTime/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://sevnqiao.github.io/2016/01/07/cjs18cee7000bcrwdbxcy9xhp/</loc>
-    <lastmod>2017-08-01T01:54:04.000Z</lastmod>
-    <data>
-        <display>
-        <title>横向tableView</title>
-        <pubTime>2016-01-07T08:42:36.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="TableView" url="https://sevnqiao.github.io/categories/TableView/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://sevnqiao.github.io/2016/05/31/cjs18ceec000icrwdwbl73bmv/</loc>
-    <lastmod>2017-08-01T01:54:04.000Z</lastmod>
-    <data>
-        <display>
-        <title>简书导航栏头像实现</title>
-        <pubTime>2016-05-31T08:43:10.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="TableView" url="https://sevnqiao.github.io/categories/TableView/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://sevnqiao.github.io/2015/08/07/cjs18cee00003crwd9o41rmfd/</loc>
-    <lastmod>2017-08-01T01:54:04.000Z</lastmod>
-    <data>
-        <display>
-        <title>RunTime添加属性</title>
-        <pubTime>2015-08-07T11:31:21.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="RunTime" url="https://sevnqiao.github.io/categories/RunTime/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://sevnqiao.github.io/2015/12/07/cjs18cee40007crwdg8s1ysk9/</loc>
-    <lastmod>2017-08-01T01:54:04.000Z</lastmod>
-    <data>
-        <display>
-        <title>json去空</title>
-        <pubTime>2015-12-07T08:37:18.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="项目实际" url="https://sevnqiao.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E9%99%85/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://sevnqiao.github.io/2016/06/24/cjs18cee60009crwd18xonesx/</loc>
-    <lastmod>2017-08-01T01:54:04.000Z</lastmod>
+    <loc>https://sevnqiao.github.io/2016/06/24/cjs1fje5d000fy1wd1qwe796x/</loc>
+    <lastmod>2019-02-12T06:43:17.161Z</lastmod>
     <data>
         <display>
         <title>文件夹的操作NSFileManager</title>
         <pubTime>2016-06-24T06:23:37.000Z</pubTime>
         
+        <tag>iOS</tag>
+         
+        <tag>项目实际</tag>
+         
          
            
              
-              <breadCrumb title="项目实际" url="https://sevnqiao.github.io/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E9%99%85/"/>
+              <breadCrumb title="iOS" url="https://sevnqiao.github.io/categories/iOS/"/>
+          
+             
+              <breadCrumb title="项目实际" url="https://sevnqiao.github.io/categories/iOS/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E9%99%85/"/>
           
         </display>
     </data>
     </url>
 
     
-    
+  <url>
+    <loc>https://sevnqiao.github.io/2016/01/07/cjs1fje5g000jy1wdkckdks20/</loc>
+    <lastmod>2019-02-12T06:42:22.787Z</lastmod>
+    <data>
+        <display>
+        <title>横向tableView</title>
+        <pubTime>2016-01-07T08:42:36.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+        <tag>tableView</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://sevnqiao.github.io/categories/iOS/"/>
+          
+             
+              <breadCrumb title="tableView" url="https://sevnqiao.github.io/categories/iOS/tableView/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
-    <loc>https://sevnqiao.github.io/2016/03/27/cjs18ceed000jcrwd6zcoajqr/</loc>
-    <lastmod>2017-08-01T01:54:04.000Z</lastmod>
+    <loc>https://sevnqiao.github.io/2016/05/31/cjs1fje5k000py1wdg1qouvp0/</loc>
+    <lastmod>2019-02-12T06:41:34.497Z</lastmod>
+    <data>
+        <display>
+        <title>简书导航栏头像实现</title>
+        <pubTime>2016-05-31T08:43:10.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+        <tag>tableView</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://sevnqiao.github.io/categories/iOS/"/>
+          
+             
+              <breadCrumb title="tableView" url="https://sevnqiao.github.io/categories/iOS/tableView/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://sevnqiao.github.io/2015/05/25/cjs1fjeah002dy1wdrqj8b6ww/</loc>
+    <lastmod>2019-02-12T06:39:52.001Z</lastmod>
+    <data>
+        <display>
+        <title>利用runtime解决数组字典的崩溃问题</title>
+        <pubTime>2015-05-25T12:28:20.000Z</pubTime>
+        
+        <tag>runtime</tag>
+         
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://sevnqiao.github.io/categories/iOS/"/>
+          
+             
+              <breadCrumb title="runtime" url="https://sevnqiao.github.io/categories/iOS/runtime/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://sevnqiao.github.io/2016/09/20/cjs1fje5c000ey1wdcb92gdfq/</loc>
+    <lastmod>2019-02-12T06:39:28.027Z</lastmod>
+    <data>
+        <display>
+        <title>如何让Xcode8支持iOS6和iOS7?</title>
+        <pubTime>2016-09-20T08:44:25.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+        <tag>项目实际</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://sevnqiao.github.io/categories/iOS/"/>
+          
+             
+              <breadCrumb title="项目实际" url="https://sevnqiao.github.io/categories/iOS/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E9%99%85/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://sevnqiao.github.io/2018/08/07/cjs1fje59000by1wdlo9v1owf/</loc>
+    <lastmod>2019-02-12T06:39:11.612Z</lastmod>
+    <data>
+        <display>
+        <title>使用UIViewPropertyAnimator 来控制毛玻璃</title>
+        <pubTime>2018-08-07T08:42:36.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://sevnqiao.github.io/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://sevnqiao.github.io/2016/03/27/cjs1fje5l000qy1wdan5zov4w/</loc>
+    <lastmod>2019-02-12T06:38:40.830Z</lastmod>
     <data>
         <display>
         <title>网络框架</title>
         <pubTime>2016-03-27T02:43:56.000Z</pubTime>
         
+        <tag>iOS</tag>
+         
+        <tag>网络</tag>
+         
          
            
              
-              <breadCrumb title="网络" url="https://sevnqiao.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
+              <breadCrumb title="iOS" url="https://sevnqiao.github.io/categories/iOS/"/>
+          
+             
+              <breadCrumb title="网络" url="https://sevnqiao.github.io/categories/iOS/%E7%BD%91%E7%BB%9C/"/>
           
         </display>
     </data>
     </url>
 
+    
+  <url>
+    <loc>https://sevnqiao.github.io/2017/08/21/cjs1fje520003y1wdg7epndgv/</loc>
+    <lastmod>2019-02-12T06:38:03.802Z</lastmod>
+    <data>
+        <display>
+        <title>iOS9之前collectionView拖拽重排的实现</title>
+        <pubTime>2017-08-21T09:11:12.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+        <tag>CollectionView</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://sevnqiao.github.io/categories/iOS/"/>
+          
+             
+              <breadCrumb title="CollectionView" url="https://sevnqiao.github.io/categories/iOS/CollectionView/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://sevnqiao.github.io/2015/08/07/cjs1fje4x0001y1wdkyzsbund/</loc>
+    <lastmod>2019-02-12T06:37:36.735Z</lastmod>
+    <data>
+        <display>
+        <title>RunTime添加属性</title>
+        <pubTime>2015-08-07T11:31:21.000Z</pubTime>
+        
+        <tag>runtime</tag>
+         
+        <tag>iOS</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://sevnqiao.github.io/categories/iOS/"/>
+          
+             
+              <breadCrumb title="RunTime" url="https://sevnqiao.github.io/categories/iOS/RunTime/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://sevnqiao.github.io/2015/12/07/cjs1fje560007y1wdkacmke6i/</loc>
+    <lastmod>2019-02-12T06:37:24.263Z</lastmod>
+    <data>
+        <display>
+        <title>json去空</title>
+        <pubTime>2015-12-07T08:37:18.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+        <tag>项目实际</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://sevnqiao.github.io/categories/iOS/"/>
+          
+             
+              <breadCrumb title="项目实际" url="https://sevnqiao.github.io/categories/iOS/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E9%99%85/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://sevnqiao.github.io/2017/08/25/cjs1fjeaf002cy1wdp2i0sxzd/</loc>
+    <lastmod>2019-02-12T06:35:58.065Z</lastmod>
+    <data>
+        <display>
+        <title>ChartView折线图+饼状图</title>
+        <pubTime>2017-08-25T07:36:29.000Z</pubTime>
+        
+        <tag>CALyer</tag>
+         
+        <tag>UIBeziaPath</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://sevnqiao.github.io/categories/iOS/"/>
+          
+             
+              <breadCrumb title="CALyer" url="https://sevnqiao.github.io/categories/iOS/CALyer/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
     
     
 </urlset>

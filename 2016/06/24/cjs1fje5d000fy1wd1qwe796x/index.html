@@ -1,0 +1,865 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,项目实际," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="最近好多地方用到了关于文件夹及文件路径的操作,特此总结一下. 获取应用目录系统给我们提供了下面这个方法,该方法可以快速获取相关目录:1FOUNDATION_EXPORT NSArray&amp;lt;NSString *&amp;gt; *NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory directory, NSSearchPathDomainM">
+<meta name="keywords" content="iOS,项目实际">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件夹的操作NSFileManager">
+<meta property="og:url" content="https://sevnqiao.github.io/2016/06/24/cjs1fje5d000fy1wd1qwe796x/index.html">
+<meta property="og:site_name" content="Sevn">
+<meta property="og:description" content="最近好多地方用到了关于文件夹及文件路径的操作,特此总结一下. 获取应用目录系统给我们提供了下面这个方法,该方法可以快速获取相关目录:1FOUNDATION_EXPORT NSArray&amp;lt;NSString *&amp;gt; *NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory directory, NSSearchPathDomainM">
+<meta property="og:updated_time" content="2019-02-12T06:43:17.161Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文件夹的操作NSFileManager">
+<meta name="twitter:description" content="最近好多地方用到了关于文件夹及文件路径的操作,特此总结一下. 获取应用目录系统给我们提供了下面这个方法,该方法可以快速获取相关目录:1FOUNDATION_EXPORT NSArray&amp;lt;NSString *&amp;gt; *NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory directory, NSSearchPathDomainM">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevnqiao.github.io/2016/06/24/cjs1fje5d000fy1wd1qwe796x/"/>
+
+
+
+
+
+  <title>文件夹的操作NSFileManager | Sevn</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sevn</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">St you want to do.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-download">
+          <a href="/downloads/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-download"></i> <br />
+            
+            资源下载
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+<meta name="baidu-site-verification" content="60PULNoRpm" />
+
+<script>
+(function(){
+var bp = document.createElement('script');
+var curProtocol = window.location.protocol.split(':')[0];
+if (curProtocol === 'https') {
+bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+}
+else {
+bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+}
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2016/06/24/cjs1fje5d000fy1wd1qwe796x/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiong.">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13326241?v=3&u=280855f8bfb84fd0ef8e1c385799f0d279084a9a&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sevn">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">文件夹的操作NSFileManager</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-24T14:23:37+08:00">
+                2016-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/项目实际/" itemprop="url" rel="index">
+                    <span itemprop="name">项目实际</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  429
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近好多地方用到了关于文件夹及文件路径的操作,特此总结一下.</p>
+<h4 id="获取应用目录"><a href="#获取应用目录" class="headerlink" title="获取应用目录"></a>获取应用目录</h4><p>系统给我们提供了下面这个方法,该方法可以快速获取相关目录:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FOUNDATION_EXPORT <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSSearchPathDirectory</span> directory, <span class="built_in">NSSearchPathDomainMask</span> domainMask, <span class="built_in">BOOL</span> expandTilde);</div></pre></td></tr></table></figure></p>
+<p>其中NSSearchPathDirectory字段就是我们要找的文件目录, 这个枚举中我们平时使用较多的是如下三个:</p>
+<blockquote>
+<ul>
+<li>NSDocumentDirectory </li>
+<li>NSCachesDirectory</li>
+<li>NSLibraryDirectory</li>
+</ul>
+</blockquote>
+<p>如获取cache文件夹:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).lastObject;</div></pre></td></tr></table></figure></p>
+<h4 id="创建一个文件夹"><a href="#创建一个文件夹" class="headerlink" title="创建一个文件夹"></a>创建一个文件夹</h4><p> 很多时候我们还要在系统文件夹下面再创建一个新的文件夹.<br>方法如下:<br>// 创建一条路径<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">-(<span class="built_in">NSString</span> *)createFolder:(<span class="built_in">NSString</span> *)folder</div><div class="line">&#123;    </div><div class="line">    <span class="built_in">BOOL</span> isDir = <span class="literal">NO</span>;</div><div class="line">    <span class="built_in">NSFileManager</span> *fileManager = [<span class="built_in">NSFileManager</span> defaultManager];</div><div class="line">    <span class="built_in">BOOL</span> existed = [fileManager fileExistsAtPath:folder isDirectory:&amp;isDir];</div><div class="line">    <span class="keyword">if</span> ( !(isDir == <span class="literal">YES</span> &amp;&amp; existed == <span class="literal">YES</span>) )</div><div class="line">    &#123;</div><div class="line">        [fileManager createDirectoryAtPath:folder withIntermediateDirectories:<span class="literal">YES</span> attributes:<span class="literal">nil</span> error:<span class="literal">nil</span>];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> folder;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="获取某文件夹下所有的文件路径"><a href="#获取某文件夹下所有的文件路径" class="headerlink" title="获取某文件夹下所有的文件路径"></a>获取某文件夹下所有的文件路径</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取存储目录下的所有音频文件</span></div><div class="line">- (<span class="built_in">NSArray</span> *)getLocalFilePathArray:(<span class="built_in">NSString</span> *)filePath</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSMutableArray</span> *filePathArray = [<span class="built_in">NSMutableArray</span> array];</div><div class="line">    </div><div class="line">    <span class="built_in">NSFileManager</span>* manager = [<span class="built_in">NSFileManager</span> defaultManager];</div><div class="line">    <span class="built_in">NSString</span> *filePath = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@/%@"</span>,<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).lastObject, filePath];</div><div class="line">    <span class="built_in">NSEnumerator</span> *childFilesEnumerator = [[manager subpathsAtPath:filePath] objectEnumerator];</div><div class="line">    </div><div class="line">    <span class="built_in">NSString</span>* fileName;</div><div class="line">    <span class="keyword">while</span> ((fileName = [childFilesEnumerator nextObject]) != <span class="literal">nil</span>)&#123;</div><div class="line">        <span class="built_in">NSString</span>* fileAbsolutePath = [filePath stringByAppendingPathComponent:fileName];</div><div class="line">        [filePathArray addObject:fileAbsolutePath];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> filePathArray;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="获取文件夹中单个文件的大小"><a href="#获取文件夹中单个文件的大小" class="headerlink" title="获取文件夹中单个文件的大小"></a>获取文件夹中单个文件的大小</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">long</span> <span class="keyword">long</span>) fileSizeAtPath:(<span class="built_in">NSString</span>*) filePath</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSFileManager</span>* manager = [<span class="built_in">NSFileManager</span> defaultManager];</div><div class="line">    <span class="keyword">if</span> ([manager fileExistsAtPath:filePath])</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> [[manager attributesOfItemAtPath:filePath error:<span class="literal">nil</span>] fileSize];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="获取整个文件夹的大小"><a href="#获取整个文件夹的大小" class="headerlink" title="获取整个文件夹的大小"></a>获取整个文件夹的大小</h4><p>有了上面的获取单个文件大小的方法,我们还可以获取整个文件夹的大小,如下:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">float</span> ) folderSizeAtPath:(<span class="built_in">NSString</span>*) folderPath</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSFileManager</span>* manager = [<span class="built_in">NSFileManager</span> defaultManager];</div><div class="line">    <span class="keyword">if</span> (![manager fileExistsAtPath:folderPath]) </div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="built_in">NSEnumerator</span> *childFilesEnumerator = [[manager subpathsAtPath:folderPath] objectEnumerator];</div><div class="line">    <span class="built_in">NSString</span>* fileName;</div><div class="line">    <span class="keyword">long</span> <span class="keyword">long</span> folderSize = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span> ((fileName = [childFilesEnumerator nextObject]) != <span class="literal">nil</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">NSString</span>* fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];</div><div class="line">        folderSize += [<span class="keyword">self</span> fileSizeAtPath:fileAbsolutePath];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> folderSize/(<span class="number">1024.0</span>*<span class="number">1024.0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>目前用到的这么多, 当然还有许多方法未列出来, 欢迎各位同学补充.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/项目实际/" rel="tag"># 项目实际</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/31/cjs1fje5k000py1wdg1qouvp0/" rel="next" title="简书导航栏头像实现">
+                <i class="fa fa-chevron-left"></i> 简书导航栏头像实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/20/cjs1fje5c000ey1wdcb92gdfq/" rel="prev" title="如何让Xcode8支持iOS6和iOS7?">
+                如何让Xcode8支持iOS6和iOS7? <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/13326241?v=3&u=280855f8bfb84fd0ef8e1c385799f0d279084a9a&s=400"
+               alt="Xiong." />
+          <p class="site-author-name" itemprop="name">Xiong.</p>
+           
+              <p class="site-description motion-element" itemprop="description">Do it ,if you have some time.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevnqiao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/e5fd37b19560" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-wpforms"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="Next主题配置文档" target="_blank">Next主题配置文档</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://hexo.io/docs/" title="Hexo官方配置文档" target="_blank">Hexo官方配置文档</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=110 src="//music.163.com/outchain/player?type=0&id=779925371&auto=0&height=90"></iframe>
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取应用目录"><span class="nav-number">1.</span> <span class="nav-text">获取应用目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建一个文件夹"><span class="nav-number">2.</span> <span class="nav-text">创建一个文件夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取某文件夹下所有的文件路径"><span class="nav-number">3.</span> <span class="nav-text">获取某文件夹下所有的文件路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取文件夹中单个文件的大小"><span class="nav-number">4.</span> <span class="nav-text">获取文件夹中单个文件的大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取整个文件夹的大小"><span class="nav-number">5.</span> <span class="nav-text">获取整个文件夹的大小</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiong.</span>
+<p>
+Yesterday you said tomorrow.<Br/>
+</p>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

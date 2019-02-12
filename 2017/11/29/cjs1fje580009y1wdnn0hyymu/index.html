@@ -1,0 +1,870 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,Universal Link," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="传统方式 schema　　现在线上大多数 App 使用的就是 schema 跳转，都对应一套路由法则，基本都能做到跳转到 App 内任一界面。 1location.href?=?&amp;apos;schema://xxxx&amp;apos; 但 schema 有个弊端：iOS中，如果用户没有安装App，那么他一定会经历2个事情： 121、schema打开app，但是失败，延迟后，跳转下载App2、跳转下载Ap">
+<meta name="keywords" content="iOS,Universal Link">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wap 唤起App 的两种方式Schema &amp; Universal Link">
+<meta property="og:url" content="https://sevnqiao.github.io/2017/11/29/cjs1fje580009y1wdnn0hyymu/index.html">
+<meta property="og:site_name" content="Sevn">
+<meta property="og:description" content="传统方式 schema　　现在线上大多数 App 使用的就是 schema 跳转，都对应一套路由法则，基本都能做到跳转到 App 内任一界面。 1location.href?=?&amp;apos;schema://xxxx&amp;apos; 但 schema 有个弊端：iOS中，如果用户没有安装App，那么他一定会经历2个事情： 121、schema打开app，但是失败，延迟后，跳转下载App2、跳转下载Ap">
+<meta property="og:updated_time" content="2019-02-12T07:07:03.947Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="wap 唤起App 的两种方式Schema &amp; Universal Link">
+<meta name="twitter:description" content="传统方式 schema　　现在线上大多数 App 使用的就是 schema 跳转，都对应一套路由法则，基本都能做到跳转到 App 内任一界面。 1location.href?=?&amp;apos;schema://xxxx&amp;apos; 但 schema 有个弊端：iOS中，如果用户没有安装App，那么他一定会经历2个事情： 121、schema打开app，但是失败，延迟后，跳转下载App2、跳转下载Ap">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevnqiao.github.io/2017/11/29/cjs1fje580009y1wdnn0hyymu/"/>
+
+
+
+
+
+  <title>wap 唤起App 的两种方式Schema & Universal Link | Sevn</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sevn</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">St you want to do.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-download">
+          <a href="/downloads/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-download"></i> <br />
+            
+            资源下载
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+<meta name="baidu-site-verification" content="60PULNoRpm" />
+
+<script>
+(function(){
+var bp = document.createElement('script');
+var curProtocol = window.location.protocol.split(':')[0];
+if (curProtocol === 'https') {
+bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+}
+else {
+bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+}
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2017/11/29/cjs1fje580009y1wdnn0hyymu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiong.">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13326241?v=3&u=280855f8bfb84fd0ef8e1c385799f0d279084a9a&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sevn">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">wap 唤起App 的两种方式Schema & Universal Link</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T14:48:18+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/Universal-Link/" itemprop="url" rel="index">
+                    <span itemprop="name">Universal Link</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  885
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="传统方式-schema"><a href="#传统方式-schema" class="headerlink" title="传统方式 schema"></a>传统方式 schema</h2><p>　　现在线上大多数 App 使用的就是 schema 跳转，都对应一套路由法则，基本都能做到跳转到 App 内任一界面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">location.href?=?&apos;schema://xxxx&apos;</div></pre></td></tr></table></figure>
+<p>但 schema 有个弊端：iOS中，如果用户没有安装App，那么他一定会经历2个事情：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1、schema打开app，但是失败，延迟后，跳转下载App</div><div class="line">2、跳转下载App之前schema会弹个可恶的跳转失败的框，然后再延迟后弹跳转AppStore的框</div></pre></td></tr></table></figure>
+<p>再就是 schema 被微信等应用禁止跳转了。</p>
+<h2 id="iOS9-新方式-Universal-Link"><a href="#iOS9-新方式-Universal-Link" class="headerlink" title="iOS9 新方式 Universal Link"></a>iOS9 新方式 Universal Link</h2><p>Universal Link和 schema 一样，目前还未被微信等禁止，也不会弹出跳转失败的弹出框。</p>
+<p>####Universal Link实现过程</p>
+<p>######1、一个支持 SSL 访问的域名，且不能是自建证书的 https 域名</p>
+<p>######2、新建一个apple-app-site-association文件，上传到域名根目录下，或 .well-known 文件夹下，<br>apple-app-site-association文件内容是一个 json </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"applinks"</span>:</div><div class="line">    &#123;</div><div class="line">        <span class="string">"apps"</span>:[],</div><div class="line">        <span class="string">"details"</span>:[</div><div class="line">           &#123;</div><div class="line">               <span class="string">"appID"</span>:<span class="string">"ABCDEFG.com.aaa.bbb.ccc"</span>,</div><div class="line">               <span class="string">"paths"</span>:[<span class="string">"NOT /aaaa/*"</span>,<span class="string">"/iosuniversallink/*"</span>]</div><div class="line">           &#125;,</div><div class="line">           &#123;</div><div class="line">               <span class="string">"appID"</span>:<span class="string">"GFEDCBA.com.aaa.bbb.ccc"</span>,</div><div class="line">               <span class="string">"paths"</span>:[<span class="string">"NOT /aaaa/*"</span>,<span class="string">"/iosuniversallink/*"</span>]</div><div class="line">           &#125;</div><div class="line">       ]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>appId 为 teamId + boundleId<br>paths 为域名下可识别或不可识别的 path 路径， 如 <a href="https://www.xxx.com/iosuniversallink/*" target="_blank" rel="external">https://www.xxx.com/iosuniversallink/*</a>,  就可以唤起 app， 而 <a href="https://www.xxx.com/aaaa/xxxxx则直接跳转到" target="_blank" rel="external">https://www.xxx.com/aaaa/xxxxx则直接跳转到</a> web 页了。</p>
+<p><code>注意：该文件没有后缀名
+附：链家 json 文件：https://linkm.lianjia.com/apple-app-site-association
+    知乎 json 文件：https://oia.zhihu.com/apple-app-site-association</code></p>
+<p>######3、配置iOS App工程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. 开发者中心证书打开Associated Domains</div><div class="line">2. 工程配置Associated Domains</div><div class="line">3. 将你apple-app-site-association所在域名配置进去</div><div class="line">4. 给你的工程像Schema的OpenUrl一样，编写App被唤醒后的处理逻辑</div></pre></td></tr></table></figure></p>
+<p>######4、Universal Link的基本运作流程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1. APP第一次启动 or APP更新版本后第一次启动</div><div class="line">2. APP向工程里配置的域名发起Get请求拉取apple-app-association Json File</div><div class="line">3. APP将apple-app-association注册给系统</div><div class="line">4. 由任意webview发起跳转的url，如果命中了apple-app-association注册过的通用链接</div><div class="line">5. 打开App，触发Universal Link delegate</div><div class="line">6. 没命中，webview继续跳转url</div><div class="line">7. 在你进行apple-app-association 以及 App工程的配置之后，整个Universal Link的运作流程完全由系统控制了</div></pre></td></tr></table></figure>
+<p>####Universal Link 跨域<br>　　Universal Link有跨域问题，Universal Link必须要求跨域，如果不跨域，就不行，就失效，就不工作。（iOS 9.2之后的改动）</p>
+<p>　　假如当前网页的域名是 A，当前网页发起跳转的域名是 B，必须要求 B 和 A 是不同域名，才会触发Universal Link，如果B 和 A 是相同域名，只会继续在当前WebView里面进行跳转，哪怕你的Universal Link一切正常，根本不会打开App</p>
+<p>####产品需求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1、如果已安装App，跳转对应界面</div><div class="line">打开App 触发handleUniversalLink</div><div class="line">走到/_iosuniversallink/分支，拼接出任意App内的界面路由</div><div class="line">跳转界面</div><div class="line"></div><div class="line">2、如果没安装App，跳转App下载界面</div><div class="line">WebView原地跳转https://xxx.xxx.xxx/_iosuniversallink/*</div><div class="line">命中服务器的重定向逻辑</div><div class="line">重定向到AppStore跳转页面</div><div class="line">打开AppStore下载</div></pre></td></tr></table></figure></p>
+<h2 id="解决了旧Schema模式下的弊端问题："><a href="#解决了旧Schema模式下的弊端问题：" class="headerlink" title="解决了旧Schema模式下的弊端问题："></a><p style="color:green">解决了旧Schema模式下的弊端问题：</p></h2><p>　　Schema无法判断是否安装App，只能采用setTimeout的Trick方式，Schema的Trick方式会有一个丑陋的错误跳转弹框。Schema无法在微信/手百等App内，打开我们自己的App<br>　　简单的说，这样设计的初衷就是，我不为了通用链接这一目的来使用Universal Link，来统一WAP&amp;APP的URL跳转，我就为了把Universal Link当做加强版Schema来使用</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/Universal-Link/" rel="tag"># Universal Link</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/25/cjs1fjeaf002cy1wdp2i0sxzd/" rel="next" title="ChartView折线图+饼状图">
+                <i class="fa fa-chevron-left"></i> ChartView折线图+饼状图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/07/cjs1fje59000by1wdlo9v1owf/" rel="prev" title="使用UIViewPropertyAnimator 来控制毛玻璃">
+                使用UIViewPropertyAnimator 来控制毛玻璃 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/13326241?v=3&u=280855f8bfb84fd0ef8e1c385799f0d279084a9a&s=400"
+               alt="Xiong." />
+          <p class="site-author-name" itemprop="name">Xiong.</p>
+           
+              <p class="site-description motion-element" itemprop="description">Do it ,if you have some time.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevnqiao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/e5fd37b19560" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-wpforms"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="Next主题配置文档" target="_blank">Next主题配置文档</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://hexo.io/docs/" title="Hexo官方配置文档" target="_blank">Hexo官方配置文档</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=110 src="//music.163.com/outchain/player?type=0&id=779925371&auto=0&height=90"></iframe>
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#传统方式-schema"><span class="nav-number">1.</span> <span class="nav-text">传统方式 schema</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS9-新方式-Universal-Link"><span class="nav-number">2.</span> <span class="nav-text">iOS9 新方式 Universal Link</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决了旧Schema模式下的弊端问题："><span class="nav-number">3.</span> <span class="nav-text">解决了旧Schema模式下的弊端问题：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiong.</span>
+<p>
+Yesterday you said tomorrow.<Br/>
+</p>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

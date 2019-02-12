@@ -1,0 +1,880 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CALyer,UIBeziaPath," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="最近项目上线了,有点时间便想着重构一下项目中之前使用的折线图. 先预览下效果图. 理顺思路, 用 CAShapeLayer + UIBeziapath画线 , 用 CATextLayer 显示文本. 一. 饼状图1. 画扇形 a.移动画笔到圆心b.画扇形的直边c.画弧边d.画另一条直边  123456789101112131415161718192021222324252627282930- (v">
+<meta name="keywords" content="CALyer,UIBeziaPath">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ChartView折线图+饼状图">
+<meta property="og:url" content="https://sevnqiao.github.io/2017/08/25/cjs1fjeaf002cy1wdp2i0sxzd/index.html">
+<meta property="og:site_name" content="Sevn">
+<meta property="og:description" content="最近项目上线了,有点时间便想着重构一下项目中之前使用的折线图. 先预览下效果图. 理顺思路, 用 CAShapeLayer + UIBeziapath画线 , 用 CATextLayer 显示文本. 一. 饼状图1. 画扇形 a.移动画笔到圆心b.画扇形的直边c.画弧边d.画另一条直边  123456789101112131415161718192021222324252627282930- (v">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1783540-9b9b11bfb6177ff2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-02-12T06:35:58.065Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ChartView折线图+饼状图">
+<meta name="twitter:description" content="最近项目上线了,有点时间便想着重构一下项目中之前使用的折线图. 先预览下效果图. 理顺思路, 用 CAShapeLayer + UIBeziapath画线 , 用 CATextLayer 显示文本. 一. 饼状图1. 画扇形 a.移动画笔到圆心b.画扇形的直边c.画弧边d.画另一条直边  123456789101112131415161718192021222324252627282930- (v">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1783540-9b9b11bfb6177ff2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevnqiao.github.io/2017/08/25/cjs1fjeaf002cy1wdp2i0sxzd/"/>
+
+
+
+
+
+  <title>ChartView折线图+饼状图 | Sevn</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sevn</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">St you want to do.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-download">
+          <a href="/downloads/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-download"></i> <br />
+            
+            资源下载
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+<meta name="baidu-site-verification" content="60PULNoRpm" />
+
+<script>
+(function(){
+var bp = document.createElement('script');
+var curProtocol = window.location.protocol.split(':')[0];
+if (curProtocol === 'https') {
+bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+}
+else {
+bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+}
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2017/08/25/cjs1fjeaf002cy1wdp2i0sxzd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiong.">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13326241?v=3&u=280855f8bfb84fd0ef8e1c385799f0d279084a9a&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sevn">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ChartView折线图+饼状图</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T15:36:29+08:00">
+                2017-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/CALyer/" itemprop="url" rel="index">
+                    <span itemprop="name">CALyer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,096
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近项目上线了,有点时间便想着重构一下项目中之前使用的折线图. 先预览下效果图.<br><img src="http://upload-images.jianshu.io/upload_images/1783540-9b9b11bfb6177ff2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PieChartView+LineChartVIew.png"></p>
+<p>理顺思路, 用 CAShapeLayer + UIBeziapath画线 , 用 CATextLayer 显示文本.</p>
+<h4 id="一-饼状图"><a href="#一-饼状图" class="headerlink" title="一. 饼状图"></a><em>一. 饼状图</em></h4><h6 id="1-画扇形"><a href="#1-画扇形" class="headerlink" title="1. 画扇形"></a>1. 画扇形</h6><blockquote>
+<p>a.移动画笔到圆心<br>b.画扇形的直边<br>c.画弧边<br>d.画另一条直边</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)drawChildPieWithPercent:(<span class="built_in">CGFloat</span>)percent arcPoint:(<span class="built_in">CGPoint</span>)arcPoint radiu:(<span class="built_in">CGFloat</span>)radiu startAngle:(<span class="built_in">CGFloat</span>)startAngle endAngle:(<span class="built_in">CGFloat</span>)endAngle color:(<span class="built_in">UIColor</span> *)color isSelect:(<span class="built_in">BOOL</span>)isSelect</div><div class="line">&#123;</div><div class="line">    <span class="built_in">CGPoint</span> startPoint = <span class="built_in">CGPointMake</span>(arcPoint.x + radiu * cos(startAngle), arcPoint.y + radiu * sin(startAngle));</div><div class="line">    </div><div class="line">    <span class="built_in">UIBezierPath</span> *bezierPath = [<span class="built_in">UIBezierPath</span> bezierPath];</div><div class="line">    [bezierPath moveToPoint:arcPoint];</div><div class="line">    [bezierPath addLineToPoint:startPoint];</div><div class="line">    [bezierPath addArcWithCenter:arcPoint radius:radiu startAngle:startAngle endAngle:endAngle clockwise:<span class="literal">YES</span>];</div><div class="line">    [bezierPath addLineToPoint:arcPoint];</div><div class="line">    </div><div class="line">    <span class="built_in">CGFloat</span> padding = isSelect ? <span class="number">10</span> : <span class="number">0</span>;</div><div class="line">    <span class="built_in">CGPoint</span> point = <span class="built_in">CGPointMake</span>(padding * cos(startAngle + (endAngle-startAngle)/<span class="number">2</span>) ,</div><div class="line">                                   padding * sin(startAngle + (endAngle-startAngle)/<span class="number">2</span>));</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="built_in">CAShapeLayer</span> *layer = [<span class="built_in">CAShapeLayer</span> layer];</div><div class="line">    layer.backgroundColor = [<span class="built_in">UIColor</span> clearColor].CGColor;</div><div class="line"></div><div class="line">    layer.frame = <span class="built_in">CGRectMake</span>(point.x, point.y, kWidth, kHeight);</div><div class="line">    layer.path = bezierPath.CGPath;</div><div class="line">    layer.fillColor = color.CGColor;</div><div class="line">    layer.strokeColor = color.CGColor;</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span>.layer addSublayer:layer];</div><div class="line"></div><div class="line">    [_pathArray addObject:bezierPath];</div><div class="line">    [_layerArray addObject:layer];</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span> drawTextWithContent:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"占比%.1f"</span>, percent] percent:percent arcPoint:arcPoint radiu:radiu startAngle:startAngle endAngle:endAngle color:color];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="2-画扇形对应的描述文本"><a href="#2-画扇形对应的描述文本" class="headerlink" title="2. 画扇形对应的描述文本"></a>2. 画扇形对应的描述文本</h6><blockquote>
+<p>a.找到圆弧的中心点<br>b.找到圆弧中心延长点<br>c.找到放置文本的点<br>d.连线上面三个点<br>e.绘制文本</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)drawTextWithContent:(<span class="built_in">NSString</span> *)content percent:(<span class="built_in">CGFloat</span>)percent arcPoint:(<span class="built_in">CGPoint</span>)arcPoint radiu:(<span class="built_in">CGFloat</span>)radiu startAngle:(<span class="built_in">CGFloat</span>)startAngle endAngle:(<span class="built_in">CGFloat</span>)endAngle color:(<span class="built_in">UIColor</span> *)color</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 圆弧中心点</span></div><div class="line">    <span class="built_in">CGPoint</span> point1 = <span class="built_in">CGPointMake</span>(arcPoint.x + radiu * cos(startAngle + percent * M_PI), arcPoint.y + radiu * sin(startAngle + percent * M_PI));</div><div class="line">    <span class="comment">// 圆弧中心延长点</span></div><div class="line">    <span class="built_in">CGPoint</span> point2 = <span class="built_in">CGPointMake</span>(arcPoint.x + (radiu + <span class="number">20</span>) * cos(startAngle + percent  * M_PI), arcPoint.y + (radiu + <span class="number">20</span>) * sin(startAngle + percent * M_PI));</div><div class="line">    </div><div class="line">    <span class="built_in">UIBezierPath</span> *bezierPath = [<span class="built_in">UIBezierPath</span> bezierPath];</div><div class="line">    [bezierPath moveToPoint:point1];</div><div class="line">    [bezierPath addLineToPoint:point2];</div><div class="line">    <span class="comment">// 找到放置文本的点</span></div><div class="line">    <span class="built_in">CGPoint</span> point3 = <span class="built_in">CGPointZero</span>;</div><div class="line">    point3.y = point2.y;</div><div class="line">    <span class="keyword">if</span> (point2.x &gt; arcPoint.x)</div><div class="line">    &#123;</div><div class="line">        point3.x = point2.x + <span class="number">60</span>;</div><div class="line">    &#125;<span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        point3.x = point2.x - <span class="number">60</span>;</div><div class="line">    &#125;</div><div class="line">    [bezierPath addLineToPoint:point3];</div><div class="line"></div><div class="line">    <span class="built_in">CAShapeLayer</span> *lineLayer = [<span class="built_in">CAShapeLayer</span> layer];</div><div class="line">    lineLayer.backgroundColor = [<span class="built_in">UIColor</span> clearColor].CGColor;</div><div class="line">    lineLayer.path = bezierPath.CGPath;</div><div class="line">    lineLayer.fillColor = [<span class="built_in">UIColor</span> clearColor].CGColor;</div><div class="line">    lineLayer.strokeColor = color.CGColor;</div><div class="line">    [<span class="keyword">self</span>.layer addSublayer:lineLayer];</div><div class="line">    </div><div class="line">    <span class="comment">// 文本</span></div><div class="line">    <span class="built_in">CATextLayer</span> *textLayer = [<span class="built_in">CATextLayer</span> layer];</div><div class="line">    <span class="keyword">if</span> (point2.x &gt; arcPoint.x)</div><div class="line">    &#123;</div><div class="line">        textLayer.frame = <span class="built_in">CGRectMake</span>(point2.x, point3.y<span class="number">-15</span>, fabs(point3.x-point2.x), <span class="number">15</span>);</div><div class="line">    &#125;<span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        textLayer.frame = <span class="built_in">CGRectMake</span>(point3.x, point3.y<span class="number">-15</span>, fabs(point3.x-point2.x), <span class="number">15</span>);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    textLayer.foregroundColor = color.CGColor;</div><div class="line">    textLayer.fontSize = <span class="number">12</span>;</div><div class="line">    textLayer.alignmentMode = kCAAlignmentCenter;</div><div class="line">    textLayer.string = content;</div><div class="line">    [<span class="keyword">self</span>.layer addSublayer:textLayer];</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="3-绘制剩余的扇形"><a href="#3-绘制剩余的扇形" class="headerlink" title="3.绘制剩余的扇形"></a>3.绘制剩余的扇形</h6><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)drawPieViewWithDataArray:(<span class="built_in">NSArray</span> *)dataArray</div><div class="line">&#123;</div><div class="line">    <span class="built_in">CGFloat</span> startAngle = -M_PI_2;</div><div class="line">    <span class="built_in">CGFloat</span> endAngle = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dataArray.count; i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">CGFloat</span> percent = [[dataArray objectAtIndex:i] floatValue];</div><div class="line">        </div><div class="line">        endAngle = startAngle + percent * M_PI * <span class="number">2</span>;</div><div class="line">        </div><div class="line">        <span class="built_in">CGPoint</span> arcPoint = <span class="built_in">CGPointMake</span>(<span class="keyword">self</span>.defaultArcPoint.x, <span class="keyword">self</span>.defaultArcPoint.y);</div><div class="line">        </div><div class="line">        [<span class="keyword">self</span> drawChildPieWithPercent:percent</div><div class="line">                             arcPoint:arcPoint</div><div class="line">                                radiu:<span class="keyword">self</span>.radiu</div><div class="line">                           startAngle:startAngle</div><div class="line">                             endAngle:endAngle</div><div class="line">                                color:<span class="keyword">self</span>.colorArray[i]</div><div class="line">                             isSelect:i == <span class="keyword">self</span>.selectIndex];</div><div class="line">        </div><div class="line">        startAngle = endAngle;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样基本就画出了相要的效果, 下面再加一些额外的功能:</p>
+<blockquote>
+<ol>
+<li>动画展现饼图</li>
+<li>点击某一块扇形加上动态效果</li>
+</ol>
+</blockquote>
+<h6 id="4-动画展现饼图"><a href="#4-动画展现饼图" class="headerlink" title="4.动画展现饼图"></a>4.动画展现饼图</h6><p>这里可以考虑用一个和背景色一样的 layer 挡在上面, 然后使用透明色来绘制一个圆.</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)drawCoverLayer</div><div class="line">&#123;</div><div class="line">    <span class="built_in">CAShapeLayer</span> *backLayer = [<span class="built_in">CAShapeLayer</span> layer];</div><div class="line">    backLayer.fillColor = [<span class="built_in">UIColor</span> clearColor].CGColor;</div><div class="line">    backLayer.strokeColor = <span class="keyword">self</span>.backgroundColor.CGColor;</div><div class="line">    backLayer.lineWidth = <span class="keyword">self</span>.radiu + <span class="number">10</span>;</div><div class="line">    </div><div class="line">    <span class="built_in">UIBezierPath</span> *backLayerPath = [<span class="built_in">UIBezierPath</span> bezierPathWithArcCenter:<span class="keyword">self</span>.defaultArcPoint</div><div class="line">                                                                 radius:backLayer.lineWidth/<span class="number">2</span></div><div class="line">                                                             startAngle:-M_PI_2</div><div class="line">                                                               endAngle:<span class="number">3</span> * M_PI_2</div><div class="line">                                                              clockwise:<span class="literal">YES</span>];</div><div class="line">    backLayer.path = backLayerPath.CGPath;</div><div class="line">    </div><div class="line">    <span class="built_in">CABasicAnimation</span> *animation = [<span class="built_in">CABasicAnimation</span> animationWithKeyPath:<span class="string">@"strokeStart"</span>];</div><div class="line">    animation.duration = <span class="number">2</span>;</div><div class="line">    animation.repeatCount = <span class="number">1</span>;</div><div class="line">    animation.fromValue = @(<span class="number">0</span>);</div><div class="line">    animation.toValue = @(<span class="number">1</span>);</div><div class="line">    animation.removedOnCompletion = <span class="literal">NO</span>;</div><div class="line">    animation.fillMode = kCAFillModeForwards;</div><div class="line">    [backLayer addAnimation:animation forKey:<span class="literal">nil</span>];</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span>.layer addSublayer:backLayer];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="5-点击某一块扇形加上动态效果"><a href="#5-点击某一块扇形加上动态效果" class="headerlink" title="5.点击某一块扇形加上动态效果"></a>5.点击某一块扇形加上动态效果</h6><p>在 view 的 touchBegin 方法中去实现即可,具体如下:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</div><div class="line">&#123;</div><div class="line">    <span class="built_in">UITouch</span> *touch = [touches anyObject];</div><div class="line">    <span class="built_in">CGPoint</span> touchPoint = [touch locationInView:<span class="keyword">self</span>];</div><div class="line">    </div><div class="line">    <span class="built_in">CGFloat</span> totalPercent = <span class="number">0</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;_pathArray.count; i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">UIBezierPath</span> *path = _pathArray[i];</div><div class="line">        <span class="built_in">CAShapeLayer</span> *layer = <span class="keyword">self</span>.layerArray[i];</div><div class="line">        </div><div class="line">        <span class="built_in">CGFloat</span> percent = [<span class="keyword">self</span>.dataArray[i] floatValue];</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> ([path containsPoint:touchPoint])</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">self</span>.selectIndex = i;</div><div class="line">            </div><div class="line">            <span class="built_in">CGFloat</span> padding = <span class="number">10</span>;</div><div class="line">            </div><div class="line">            <span class="built_in">CGFloat</span> startAngle = totalPercent * M_PI * <span class="number">2</span> - M_PI_2;</div><div class="line">            <span class="built_in">CGFloat</span> endAngle = startAngle + M_PI * <span class="number">2</span> * percent;</div><div class="line">            </div><div class="line">            layer.frame = <span class="built_in">CGRectMake</span>(padding * cos(startAngle + (endAngle-startAngle)/<span class="number">2</span>),</div><div class="line">                                     padding * sin(startAngle + (endAngle-startAngle)/<span class="number">2</span>),</div><div class="line">                                     kWidth,</div><div class="line">                                     kHeight);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            layer.frame = <span class="keyword">self</span>.bounds;</div><div class="line">        &#125;</div><div class="line">        totalPercent += percent;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>更多的功能还在扩展中, 具体请关<a href="https://github.com/sevnqiao/ChartViewDemo" target="_blank" rel="external">注项目地址</a></strong></p>
+<h4 id="二-折线图"><a href="#二-折线图" class="headerlink" title="二.折线图"></a>二.折线图</h4><p>这个没什么好写的, 算好相应的坐标, 再画线即可.</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 初始化 scrollview</span></div><div class="line">[<span class="keyword">self</span> initScrollView];</div><div class="line"><span class="comment">// 画横线</span></div><div class="line">[<span class="keyword">self</span> drawHorizontalLine];</div><div class="line"><span class="comment">// 画竖线</span></div><div class="line">[<span class="keyword">self</span> drawVerticalLine];</div><div class="line"><span class="comment">// 画底部标签</span></div><div class="line">[<span class="keyword">self</span> drawBottomTitle];</div><div class="line">        <span class="comment">// 画左侧刻度</span></div><div class="line">[<span class="keyword">self</span> drawYTextLayer];</div><div class="line">        <span class="comment">// 画线</span></div><div class="line">[<span class="keyword">self</span> drawValueLine];</div></pre></td></tr></table></figure>
+<p>画线的时候可以加上动画效果</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)drawValueLine</div><div class="line">&#123;</div><div class="line">    <span class="built_in">CGFloat</span> originHeight = <span class="keyword">self</span>.scrollView.frame.size.height / <span class="number">5</span>;</div><div class="line">    </div><div class="line">    <span class="built_in">UIBezierPath</span> *bezierPath = [<span class="built_in">UIBezierPath</span> bezierPath];</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">self</span>.titleArray.count; i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">CGFloat</span> value = [<span class="keyword">self</span>.dataSourceArray[i] floatValue];</div><div class="line">        <span class="built_in">CGFloat</span> scale = (value - _minValue) / (_maxValue - _minValue);</div><div class="line">        <span class="built_in">CGFloat</span> y = (<span class="number">1</span>-scale) * originHeight * <span class="number">4</span> + <span class="keyword">self</span>.originWidth * <span class="number">0.5</span>;</div><div class="line">        </div><div class="line">        <span class="built_in">CGPoint</span> point = <span class="built_in">CGPointMake</span>(<span class="keyword">self</span>.originWidth + <span class="keyword">self</span>.originWidth * i, y);</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (i == <span class="number">0</span>)</div><div class="line">        &#123;</div><div class="line">            [bezierPath moveToPoint:point];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            [bezierPath addLineToPoint:point];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="built_in">CAShapeLayer</span> *shapeLayer = [<span class="built_in">CAShapeLayer</span> layer];</div><div class="line">    shapeLayer.path = bezierPath.CGPath;</div><div class="line">    shapeLayer.strokeColor = [[[<span class="built_in">UIColor</span> redColor] colorWithAlphaComponent:<span class="number">1</span>] <span class="built_in">CGColor</span>];</div><div class="line">    shapeLayer.fillColor = [[<span class="built_in">UIColor</span> clearColor] <span class="built_in">CGColor</span>];</div><div class="line">    shapeLayer.lineWidth = <span class="number">1</span>;</div><div class="line">    [<span class="keyword">self</span>.scrollView.layer addSublayer:shapeLayer];</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="built_in">CABasicAnimation</span> *animation = [<span class="built_in">CABasicAnimation</span> animationWithKeyPath:<span class="string">@"strokeEnd"</span>];</div><div class="line">    animation.duration = <span class="number">2</span>;</div><div class="line">    animation.repeatCount = <span class="number">1</span>;</div><div class="line">    animation.fromValue = @(<span class="number">0</span>);</div><div class="line">    animation.toValue = @(<span class="number">1</span>);</div><div class="line">    animation.removedOnCompletion = <span class="literal">NO</span>;</div><div class="line">    animation.fillMode = kCAFillModeForwards;</div><div class="line">    [shapeLayer addAnimation:animation forKey:<span class="literal">nil</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>基本上就这些内容了, 我们在平时的时候可以多使用 layer 来进行绘制图形, 这样可以加快渲染速度, 提升体验. </p>
+<p>具体的代码请见<strong> <a href="https://github.com/sevnqiao/ChartViewDemo" target="_blank" rel="external">注项目地址</a></strong><br>欢迎 star!</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CALyer/" rel="tag"># CALyer</a>
+          
+            <a href="/tags/UIBeziaPath/" rel="tag"># UIBeziaPath</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/21/cjs1fje520003y1wdg7epndgv/" rel="next" title="iOS9之前collectionView拖拽重排的实现">
+                <i class="fa fa-chevron-left"></i> iOS9之前collectionView拖拽重排的实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/29/cjs1fje580009y1wdnn0hyymu/" rel="prev" title="wap 唤起App 的两种方式Schema & Universal Link">
+                wap 唤起App 的两种方式Schema & Universal Link <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/13326241?v=3&u=280855f8bfb84fd0ef8e1c385799f0d279084a9a&s=400"
+               alt="Xiong." />
+          <p class="site-author-name" itemprop="name">Xiong.</p>
+           
+              <p class="site-description motion-element" itemprop="description">Do it ,if you have some time.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevnqiao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/e5fd37b19560" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-wpforms"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="Next主题配置文档" target="_blank">Next主题配置文档</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://hexo.io/docs/" title="Hexo官方配置文档" target="_blank">Hexo官方配置文档</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=110 src="//music.163.com/outchain/player?type=0&id=779925371&auto=0&height=90"></iframe>
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-饼状图"><span class="nav-number">1.</span> <span class="nav-text">一. 饼状图</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-画扇形"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 画扇形</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-画扇形对应的描述文本"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 画扇形对应的描述文本</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-绘制剩余的扇形"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.绘制剩余的扇形</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-动画展现饼图"><span class="nav-number">1.0.4.</span> <span class="nav-text">4.动画展现饼图</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-点击某一块扇形加上动态效果"><span class="nav-number">1.0.5.</span> <span class="nav-text">5.点击某一块扇形加上动态效果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-折线图"><span class="nav-number">2.</span> <span class="nav-text">二.折线图</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiong.</span>
+<p>
+Yesterday you said tomorrow.<Br/>
+</p>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
