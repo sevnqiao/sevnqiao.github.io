@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS,tableView," />
+  <meta name="keywords" content="iOS,Universal Link," />
 
 
 
@@ -98,17 +98,17 @@
 
 
 
-<meta name="description" content="今天看了一下简书的用户界面的导航栏上的头像，于是想了一下其实现过程。 大家可以到简书客户端上看一下个人界面，可以看到以下几点：   向上移动头像会缩小，但是有下限 向下移动头像会放大，但是有上限 头像的起点y始终不变   代码实现首先，我们给导航条添加一个titleView：12345678910UIView *titleView = [[UIView alloc] init];self.navi">
-<meta name="keywords" content="iOS,tableView">
+<meta name="description" content="传统方式 schema　　现在线上大多数 App 使用的就是 schema 跳转，都对应一套路由法则，基本都能做到跳转到 App 内任一界面。 1location.href?=?&amp;apos;schema://xxxx&amp;apos; 但 schema 有个弊端：iOS中，如果用户没有安装App，那么他一定会经历2个事情： 121、schema打开app，但是失败，延迟后，跳转下载App2、跳转下载Ap">
+<meta name="keywords" content="iOS,Universal Link">
 <meta property="og:type" content="article">
-<meta property="og:title" content="简书导航栏头像实现">
-<meta property="og:url" content="https://sevnqiao.github.io/2016/05/31/cjs1i4dxq000piowdk1ttranx/index.html">
+<meta property="og:title" content="wap 唤起App 的两种方式Schema &amp; Universal Link">
+<meta property="og:url" content="https://sevnqiao.github.io/2017/11/29/cjs1k968m0009whwdit61avp3/index.html">
 <meta property="og:site_name" content="Sevn">
-<meta property="og:description" content="今天看了一下简书的用户界面的导航栏上的头像，于是想了一下其实现过程。 大家可以到简书客户端上看一下个人界面，可以看到以下几点：   向上移动头像会缩小，但是有下限 向下移动头像会放大，但是有上限 头像的起点y始终不变   代码实现首先，我们给导航条添加一个titleView：12345678910UIView *titleView = [[UIView alloc] init];self.navi">
-<meta property="og:updated_time" content="2019-02-12T06:41:34.497Z">
+<meta property="og:description" content="传统方式 schema　　现在线上大多数 App 使用的就是 schema 跳转，都对应一套路由法则，基本都能做到跳转到 App 内任一界面。 1location.href?=?&amp;apos;schema://xxxx&amp;apos; 但 schema 有个弊端：iOS中，如果用户没有安装App，那么他一定会经历2个事情： 121、schema打开app，但是失败，延迟后，跳转下载App2、跳转下载Ap">
+<meta property="og:updated_time" content="2019-02-12T07:07:03.947Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="简书导航栏头像实现">
-<meta name="twitter:description" content="今天看了一下简书的用户界面的导航栏上的头像，于是想了一下其实现过程。 大家可以到简书客户端上看一下个人界面，可以看到以下几点：   向上移动头像会缩小，但是有下限 向下移动头像会放大，但是有上限 头像的起点y始终不变   代码实现首先，我们给导航条添加一个titleView：12345678910UIView *titleView = [[UIView alloc] init];self.navi">
+<meta name="twitter:title" content="wap 唤起App 的两种方式Schema &amp; Universal Link">
+<meta name="twitter:description" content="传统方式 schema　　现在线上大多数 App 使用的就是 schema 跳转，都对应一套路由法则，基本都能做到跳转到 App 内任一界面。 1location.href?=?&amp;apos;schema://xxxx&amp;apos; 但 schema 有个弊端：iOS中，如果用户没有安装App，那么他一定会经历2个事情： 121、schema打开app，但是失败，延迟后，跳转下载App2、跳转下载Ap">
 
 
 
@@ -136,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="https://sevnqiao.github.io/2016/05/31/cjs1i4dxq000piowdk1ttranx/"/>
+  <link rel="canonical" href="https://sevnqiao.github.io/2017/11/29/cjs1k968m0009whwdit61avp3/"/>
 
 
 
 
 
-  <title>简书导航栏头像实现 | Sevn</title>
+  <title>wap 唤起App 的两种方式Schema & Universal Link | Sevn</title>
   
 
 
@@ -296,7 +296,7 @@ s.parentNode.insertBefore(bp, s);
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2016/05/31/cjs1i4dxq000piowdk1ttranx/">
+    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2017/11/29/cjs1k968m0009whwdit61avp3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiong.">
@@ -313,7 +313,7 @@ s.parentNode.insertBefore(bp, s);
 
         
         
-          <h1 class="post-title" itemprop="name headline">简书导航栏头像实现</h1>
+          <h1 class="post-title" itemprop="name headline">wap 唤起App 的两种方式Schema & Universal Link</h1>
         
 
         <div class="post-meta">
@@ -325,8 +325,8 @@ s.parentNode.insertBefore(bp, s);
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-31T16:43:10+08:00">
-                2016-05-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T14:48:18+08:00">
+                2017-11-29
               </time>
             
 
@@ -359,8 +359,8 @@ s.parentNode.insertBefore(bp, s);
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/tableView/" itemprop="url" rel="index">
-                    <span itemprop="name">tableView</span>
+                  <a href="/categories/iOS/Universal-Link/" itemprop="url" rel="index">
+                    <span itemprop="name">Universal Link</span>
                   </a>
                 </span>
 
@@ -392,7 +392,7 @@ s.parentNode.insertBefore(bp, s);
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  305
+                  885
                 </span>
               
 
@@ -408,7 +408,7 @@ s.parentNode.insertBefore(bp, s);
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1
+                  4
                 </span>
               
             </div>
@@ -426,19 +426,27 @@ s.parentNode.insertBefore(bp, s);
       
 
       
-        <p>今天看了一下简书的用户界面的导航栏上的头像，于是想了一下其实现过程。</p>
-<p>大家可以到简书客户端上看一下个人界面，可以看到以下几点：</p>
-<blockquote>
-<ol>
-<li>向上移动头像会缩小，但是有下限</li>
-<li>向下移动头像会放大，但是有上限</li>
-<li>头像的起点y始终不变</li>
-</ol>
-</blockquote>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>首先，我们给导航条添加一个<em>titleView</em>：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIView</span> *titleView = [[<span class="built_in">UIView</span> alloc] init];</div><div class="line"><span class="keyword">self</span>.navigationItem.titleView = titleView;</div><div class="line"><span class="keyword">self</span>.headerImageView = [[<span class="built_in">UIImageView</span> alloc] init];</div><div class="line"><span class="keyword">self</span>.headerImageView.layer.cornerRadius = <span class="number">30</span>;</div><div class="line"><span class="keyword">self</span>.headerImageView.layer.masksToBounds = <span class="literal">YES</span>;</div><div class="line"><span class="keyword">self</span>.headerImageView.frame = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">60</span>, <span class="number">60</span>);</div><div class="line"><span class="keyword">self</span>.headerImageView.backgroundColor = [<span class="built_in">UIColor</span> redColor];</div><div class="line"><span class="comment">// 保证用户头像水平居中</span></div><div class="line"><span class="keyword">self</span>.headerImageView.center = <span class="built_in">CGPointMake</span>(titleView.center.x, <span class="number">0</span>);</div><div class="line">[titleView addSubview:<span class="keyword">self</span>.headerImageView];</div></pre></td></tr></table></figure></p>
-<p>接下来最关键的代码就是在滚动时处理缩放用户头像的了：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView </div><div class="line">&#123;</div><div class="line">    <span class="built_in">CGFloat</span> offsetY = scrollView.contentOffset.y + scrollView.contentInset.top;</div><div class="line">    <span class="built_in">CGFloat</span> scale = <span class="number">1.0</span>;</div><div class="line">    <span class="comment">// 放大</span></div><div class="line">    <span class="keyword">if</span> (offsetY &lt; <span class="number">0</span>) &#123;</div><div class="line">        scale = MIN(<span class="number">1.5</span>, <span class="number">1</span> - offsetY / <span class="number">300</span>);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (offsetY &gt; <span class="number">0</span>) &#123; </div><div class="line">    <span class="comment">// 缩小</span></div><div class="line">        scale = MAX(<span class="number">0.45</span>, <span class="number">1</span> - offsetY / <span class="number">300</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//进行缩放</span></div><div class="line">    <span class="keyword">self</span>.headerImageView.transform = <span class="built_in">CGAffineTransformMakeScale</span>(scale, scale);</div><div class="line">    <span class="comment">// 保证缩放后y坐标不变</span></div><div class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span>.headerImageView.frame;</div><div class="line">    frame.origin.y = -<span class="keyword">self</span>.headerImageView.layer.cornerRadius / <span class="number">2</span>;</div><div class="line">    <span class="keyword">self</span>.headerImageView.frame = frame;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>哈，就是如此简单，大家可以自己动手去试一下</p>
-<p><a href="https://github.com/sevnqiao/AVPlayer-" target="_blank" rel="external">gitbub地址</a> 欢迎star</p>
+        <h2 id="传统方式-schema"><a href="#传统方式-schema" class="headerlink" title="传统方式 schema"></a>传统方式 schema</h2><p>　　现在线上大多数 App 使用的就是 schema 跳转，都对应一套路由法则，基本都能做到跳转到 App 内任一界面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">location.href?=?&apos;schema://xxxx&apos;</div></pre></td></tr></table></figure>
+<p>但 schema 有个弊端：iOS中，如果用户没有安装App，那么他一定会经历2个事情：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1、schema打开app，但是失败，延迟后，跳转下载App</div><div class="line">2、跳转下载App之前schema会弹个可恶的跳转失败的框，然后再延迟后弹跳转AppStore的框</div></pre></td></tr></table></figure>
+<p>再就是 schema 被微信等应用禁止跳转了。</p>
+<h2 id="iOS9-新方式-Universal-Link"><a href="#iOS9-新方式-Universal-Link" class="headerlink" title="iOS9 新方式 Universal Link"></a>iOS9 新方式 Universal Link</h2><p>Universal Link和 schema 一样，目前还未被微信等禁止，也不会弹出跳转失败的弹出框。</p>
+<p>####Universal Link实现过程</p>
+<p>######1、一个支持 SSL 访问的域名，且不能是自建证书的 https 域名</p>
+<p>######2、新建一个apple-app-site-association文件，上传到域名根目录下，或 .well-known 文件夹下，<br>apple-app-site-association文件内容是一个 json </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"applinks"</span>:</div><div class="line">    &#123;</div><div class="line">        <span class="string">"apps"</span>:[],</div><div class="line">        <span class="string">"details"</span>:[</div><div class="line">           &#123;</div><div class="line">               <span class="string">"appID"</span>:<span class="string">"ABCDEFG.com.aaa.bbb.ccc"</span>,</div><div class="line">               <span class="string">"paths"</span>:[<span class="string">"NOT /aaaa/*"</span>,<span class="string">"/iosuniversallink/*"</span>]</div><div class="line">           &#125;,</div><div class="line">           &#123;</div><div class="line">               <span class="string">"appID"</span>:<span class="string">"GFEDCBA.com.aaa.bbb.ccc"</span>,</div><div class="line">               <span class="string">"paths"</span>:[<span class="string">"NOT /aaaa/*"</span>,<span class="string">"/iosuniversallink/*"</span>]</div><div class="line">           &#125;</div><div class="line">       ]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>appId 为 teamId + boundleId<br>paths 为域名下可识别或不可识别的 path 路径， 如 <a href="https://www.xxx.com/iosuniversallink/*" target="_blank" rel="external">https://www.xxx.com/iosuniversallink/*</a>,  就可以唤起 app， 而 <a href="https://www.xxx.com/aaaa/xxxxx则直接跳转到" target="_blank" rel="external">https://www.xxx.com/aaaa/xxxxx则直接跳转到</a> web 页了。</p>
+<p><code>注意：该文件没有后缀名
+附：链家 json 文件：https://linkm.lianjia.com/apple-app-site-association
+    知乎 json 文件：https://oia.zhihu.com/apple-app-site-association</code></p>
+<p>######3、配置iOS App工程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. 开发者中心证书打开Associated Domains</div><div class="line">2. 工程配置Associated Domains</div><div class="line">3. 将你apple-app-site-association所在域名配置进去</div><div class="line">4. 给你的工程像Schema的OpenUrl一样，编写App被唤醒后的处理逻辑</div></pre></td></tr></table></figure></p>
+<p>######4、Universal Link的基本运作流程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1. APP第一次启动 or APP更新版本后第一次启动</div><div class="line">2. APP向工程里配置的域名发起Get请求拉取apple-app-association Json File</div><div class="line">3. APP将apple-app-association注册给系统</div><div class="line">4. 由任意webview发起跳转的url，如果命中了apple-app-association注册过的通用链接</div><div class="line">5. 打开App，触发Universal Link delegate</div><div class="line">6. 没命中，webview继续跳转url</div><div class="line">7. 在你进行apple-app-association 以及 App工程的配置之后，整个Universal Link的运作流程完全由系统控制了</div></pre></td></tr></table></figure>
+<p>####Universal Link 跨域<br>　　Universal Link有跨域问题，Universal Link必须要求跨域，如果不跨域，就不行，就失效，就不工作。（iOS 9.2之后的改动）</p>
+<p>　　假如当前网页的域名是 A，当前网页发起跳转的域名是 B，必须要求 B 和 A 是不同域名，才会触发Universal Link，如果B 和 A 是相同域名，只会继续在当前WebView里面进行跳转，哪怕你的Universal Link一切正常，根本不会打开App</p>
+<p>####产品需求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1、如果已安装App，跳转对应界面</div><div class="line">打开App 触发handleUniversalLink</div><div class="line">走到/_iosuniversallink/分支，拼接出任意App内的界面路由</div><div class="line">跳转界面</div><div class="line"></div><div class="line">2、如果没安装App，跳转App下载界面</div><div class="line">WebView原地跳转https://xxx.xxx.xxx/_iosuniversallink/*</div><div class="line">命中服务器的重定向逻辑</div><div class="line">重定向到AppStore跳转页面</div><div class="line">打开AppStore下载</div></pre></td></tr></table></figure></p>
+<h2 id="解决了旧Schema模式下的弊端问题："><a href="#解决了旧Schema模式下的弊端问题：" class="headerlink" title="解决了旧Schema模式下的弊端问题："></a><p style="color:green">解决了旧Schema模式下的弊端问题：</p></h2><p>　　Schema无法判断是否安装App，只能采用setTimeout的Trick方式，Schema的Trick方式会有一个丑陋的错误跳转弹框。Schema无法在微信/手百等App内，打开我们自己的App<br>　　简单的说，这样设计的初衷就是，我不为了通用链接这一目的来使用Universal Link，来统一WAP&amp;APP的URL跳转，我就为了把Universal Link当做加强版Schema来使用</p>
 
       
     </div>
@@ -470,7 +478,7 @@ s.parentNode.insertBefore(bp, s);
           
             <a href="/tags/iOS/" rel="tag"># iOS</a>
           
-            <a href="/tags/tableView/" rel="tag"># tableView</a>
+            <a href="/tags/Universal-Link/" rel="tag"># Universal Link</a>
           
         </div>
       
@@ -483,8 +491,8 @@ s.parentNode.insertBefore(bp, s);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/27/cjs1i4dxs000qiowdri9dz51k/" rel="next" title="网络框架">
-                <i class="fa fa-chevron-left"></i> 网络框架
+              <a href="/2017/08/25/cjs1k96ec002cwhwdtv234lvl/" rel="next" title="ChartView折线图+饼状图">
+                <i class="fa fa-chevron-left"></i> ChartView折线图+饼状图
               </a>
             
           </div>
@@ -493,8 +501,8 @@ s.parentNode.insertBefore(bp, s);
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/06/24/cjs1i4dxl000fiowdnqflmei7/" rel="prev" title="文件夹的操作NSFileManager">
-                文件夹的操作NSFileManager <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/07/cjs1k968o000bwhwd70hc2fim/" rel="prev" title="使用UIViewPropertyAnimator 来控制毛玻璃">
+                使用UIViewPropertyAnimator 来控制毛玻璃 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -520,6 +528,24 @@ s.parentNode.insertBefore(bp, s);
 
           
   <div class="comments" id="comments">
+    
+        <div id="container"></div>
+        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+        <script src="https://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
+        <script>
+        var gitment = new Gitment({
+          id: md5(window.location.pathname), // 可选。默认为 location.href
+          owner: 'sevnqiao',
+          repo: 'sevnqiao.github.io',
+          oauth: {
+            client_id: '507e5c767620ea423cfe',
+            client_secret: '642a6059c498cf1297d704fd74c6e9517fcd29d8',
+          },
+        })
+        gitment.render('container')
+        </script>
+
     
   </div>
 
@@ -670,7 +696,7 @@ s.parentNode.insertBefore(bp, s);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">1.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#传统方式-schema"><span class="nav-number">1.</span> <span class="nav-text">传统方式 schema</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS9-新方式-Universal-Link"><span class="nav-number">2.</span> <span class="nav-text">iOS9 新方式 Universal Link</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决了旧Schema模式下的弊端问题："><span class="nav-number">3.</span> <span class="nav-text">解决了旧Schema模式下的弊端问题：</span></a></li></ol></div>
             
 
           </div>
