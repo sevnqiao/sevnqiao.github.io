@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS,网络," />
+  <meta name="keywords" content="iOS,runtime," />
 
 
 
@@ -98,17 +98,17 @@
 
 
 
-<meta name="description" content="最近项目上准备把引入的Mantle替换为YYModel, 之前也听别人书把model传到网络模块中,这样返回的就是转换好的 entity了, 于是今天做了一下实现.123456789101112131415161718192021222324- (id)POST:(NSString *)address params:(NSDictionary *)params targetModelClass:(">
-<meta name="keywords" content="iOS,网络">
+<meta name="description" content="项目初期，项目经理提出一个需求，如下：  每一个controller要单独管理自己的网络请求操作，在controller销毁的时候要取消掉相应的网络请求。  为了整个项目统一，我们需要在基类中来实现，为了区别我们新建一个基类的category。当然我们需要用一个数组来存放我们的操作，可是category又不能直接添加成员变量，那我们可以直接通过runtime来直接关联一个变量：头文件如下：1234">
+<meta name="keywords" content="iOS,runtime">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网络框架">
-<meta property="og:url" content="https://sevnqiao.github.io/2016/03/27/cjs1kj814000pynwdydi6bcp4/index.html">
+<meta property="og:title" content="RunTime添加属性">
+<meta property="og:url" content="https://sevnqiao.github.io/2015/08/07/cjs1ls61h00075fwdi4ool6mm/index.html">
 <meta property="og:site_name" content="Sevn">
-<meta property="og:description" content="最近项目上准备把引入的Mantle替换为YYModel, 之前也听别人书把model传到网络模块中,这样返回的就是转换好的 entity了, 于是今天做了一下实现.123456789101112131415161718192021222324- (id)POST:(NSString *)address params:(NSDictionary *)params targetModelClass:(">
-<meta property="og:updated_time" content="2019-02-12T06:38:40.830Z">
+<meta property="og:description" content="项目初期，项目经理提出一个需求，如下：  每一个controller要单独管理自己的网络请求操作，在controller销毁的时候要取消掉相应的网络请求。  为了整个项目统一，我们需要在基类中来实现，为了区别我们新建一个基类的category。当然我们需要用一个数组来存放我们的操作，可是category又不能直接添加成员变量，那我们可以直接通过runtime来直接关联一个变量：头文件如下：1234">
+<meta property="og:updated_time" content="2019-02-12T06:37:36.735Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="网络框架">
-<meta name="twitter:description" content="最近项目上准备把引入的Mantle替换为YYModel, 之前也听别人书把model传到网络模块中,这样返回的就是转换好的 entity了, 于是今天做了一下实现.123456789101112131415161718192021222324- (id)POST:(NSString *)address params:(NSDictionary *)params targetModelClass:(">
+<meta name="twitter:title" content="RunTime添加属性">
+<meta name="twitter:description" content="项目初期，项目经理提出一个需求，如下：  每一个controller要单独管理自己的网络请求操作，在controller销毁的时候要取消掉相应的网络请求。  为了整个项目统一，我们需要在基类中来实现，为了区别我们新建一个基类的category。当然我们需要用一个数组来存放我们的操作，可是category又不能直接添加成员变量，那我们可以直接通过runtime来直接关联一个变量：头文件如下：1234">
 
 
 
@@ -136,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="https://sevnqiao.github.io/2016/03/27/cjs1kj814000pynwdydi6bcp4/"/>
+  <link rel="canonical" href="https://sevnqiao.github.io/2015/08/07/cjs1ls61h00075fwdi4ool6mm/"/>
 
 
 
 
 
-  <title>网络框架 | Sevn</title>
+  <title>RunTime添加属性 | Sevn</title>
   
 
 
@@ -296,7 +296,7 @@ s.parentNode.insertBefore(bp, s);
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2016/03/27/cjs1kj814000pynwdydi6bcp4/">
+    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2015/08/07/cjs1ls61h00075fwdi4ool6mm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiong.">
@@ -313,7 +313,7 @@ s.parentNode.insertBefore(bp, s);
 
         
         
-          <h1 class="post-title" itemprop="name headline">网络框架</h1>
+          <h1 class="post-title" itemprop="name headline">RunTime添加属性</h1>
         
 
         <div class="post-meta">
@@ -325,8 +325,8 @@ s.parentNode.insertBefore(bp, s);
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-27T10:43:56+08:00">
-                2016-03-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-08-07T19:31:21+08:00">
+                2015-08-07
               </time>
             
 
@@ -359,8 +359,8 @@ s.parentNode.insertBefore(bp, s);
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/网络/" itemprop="url" rel="index">
-                    <span itemprop="name">网络</span>
+                  <a href="/categories/iOS/RunTime/" itemprop="url" rel="index">
+                    <span itemprop="name">RunTime</span>
                   </a>
                 </span>
 
@@ -392,7 +392,7 @@ s.parentNode.insertBefore(bp, s);
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  496
+                  268
                 </span>
               
 
@@ -408,7 +408,7 @@ s.parentNode.insertBefore(bp, s);
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2
+                  1
                 </span>
               
             </div>
@@ -426,12 +426,13 @@ s.parentNode.insertBefore(bp, s);
       
 
       
-        <p>最近项目上准备把引入的<em>Mantle</em>替换为<em>YYModel</em>, 之前也听别人书把<em>model</em>传到网络模块中,这样返回的就是转换好的 <em>entity</em>了, 于是今天做了一下实现.<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">id</span>)POST:(<span class="built_in">NSString</span> *)address params:(<span class="built_in">NSDictionary</span> *)params targetModelClass:(Class)targetModel completionHnadle:(CompletionHandle)handle&#123;</div><div class="line">    </div><div class="line">     <span class="keyword">id</span> requestOperation;</div><div class="line">     requestOperation = [<span class="keyword">self</span> requestWithMethod:<span class="string">@"POST"</span> address:address params:params completionHnadle:^(<span class="keyword">id</span> operation, <span class="keyword">id</span> responseObject, <span class="built_in">NSError</span> *error) &#123;</div><div class="line">        <span class="keyword">if</span> (error)</div><div class="line">        &#123;</div><div class="line">            handle(operation, <span class="literal">nil</span>, error);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (targetModel)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">id</span> model = [targetModel yy_modelWithDictionary:responseObject];</div><div class="line">                </div><div class="line">                handle (operation, model , <span class="literal">nil</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">            &#123;</div><div class="line">                handle (operation, responseObject, <span class="literal">nil</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;];</div><div class="line">    <span class="keyword">return</span> requestOperation;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这样拿到了 targetModel就可以直接转换为对应的 entity 了.</p>
-<p>顺便还写了一个管理网络请求的队列:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">*  网络请求 operation 管理类</div><div class="line">*</div><div class="line">*  @return 管理者</div><div class="line">*/</div><div class="line">+ (<span class="keyword">instancetype</span>)shareManager;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">*  添加一个网络请求操作到数组中</div><div class="line">*</div><div class="line">*  @param operation  void</div><div class="line">*/</div><div class="line">- (<span class="keyword">void</span>)addOperation:(<span class="keyword">id</span>)operation;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">*  移除一个网络请求对象</div><div class="line">*</div><div class="line">*  @param operation  void</div><div class="line">*/</div><div class="line">- (<span class="keyword">void</span>)removeOperation:(<span class="keyword">id</span>)operation;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">*  移除所有的网络请求</div><div class="line">*/</div><div class="line">- (<span class="keyword">void</span>)removeAllOperation;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">*  获取所有的网络请求数组</div><div class="line">*</div><div class="line">*  @return 网络请求的数组</div><div class="line">*/</div><div class="line">- (<span class="built_in">NSArray</span> *)allOperation;</div></pre></td></tr></table></figure></p>
-<p>还有一个需求 , 就是有的 app 要求退出当前页面的时候,要取消当前页面所有没有完成的网络请求, 于是又写了一个基于 UIViewController 的扩展:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"UIViewController+NetworkOperationManager.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;objc/objc-runtime.h&gt;</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"NetworkRequestManager.h"</span></span></div><div class="line"></div><div class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> *kOperationKey = <span class="string">@"kOperationKey"</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UIViewController</span>     (<span class="title">NetworkOperationManager</span>)</span></div><div class="line"></div><div class="line">-(<span class="built_in">NSMutableArray</span> *)operations</div><div class="line">&#123;</div><div class="line">    <span class="keyword">id</span> obj = objc_getAssociatedObject(<span class="keyword">self</span>, &amp;kOperationKey);</div><div class="line">    <span class="keyword">if</span> (!obj) &#123;</div><div class="line">        obj = [[<span class="built_in">NSMutableArray</span> alloc]init];</div><div class="line">        objc_setAssociatedObject(<span class="keyword">self</span>, &amp;kOperationKey, obj, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> obj;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)addOperation:(<span class="keyword">id</span>)operation</div><div class="line">&#123;</div><div class="line">    [<span class="keyword">self</span>.operations addObject:operation];</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)cancleOperation:(<span class="keyword">id</span>)operation</div><div class="line">&#123;</div><div class="line">    [<span class="keyword">self</span>.operations removeObject:operation];</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)cancelAllOperation</div><div class="line">&#123;</div><div class="line">    [[NetworkRequestManager shareManager] removeAllRequestOperations];</div><div class="line">        </div><div class="line">    [<span class="keyword">self</span>.operations removeAllObjects];</div><div class="line">&#125;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
-<p>这样我们在 controller 就能很好的管理我们的网络请求了<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></div><div class="line">    </div><div class="line">    <span class="built_in">NSURLSessionDataTask</span> *op = [[NetworkRequestManager shareManager] GET:<span class="string">@"http://114.80.110.197/v3/028/json/reply/GetRegionPostsRequest"</span> params:<span class="literal">nil</span> targetModelClass:[TestModel <span class="keyword">class</span>] completionHnadle:^(<span class="keyword">id</span> operation, <span class="keyword">id</span> targetData, <span class="built_in">NSError</span> *error) &#123;</div><div class="line">        </div><div class="line">    TestModel *model = (TestModel *)targetData;</div><div class="line">        </div><div class="line">    [model.result enumerateObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</div><div class="line">            </div><div class="line">        TestModel2 *model2 = (TestModel2 *)obj;</div><div class="line">            </div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"测试地址 : %@"</span>, model2.address);</div><div class="line">        &#125;];</div><div class="line">    &#125;];</div><div class="line">    [<span class="keyword">self</span> addOperation:op];</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidDisappear:(<span class="built_in">BOOL</span>)animated&#123;</div><div class="line">    [<span class="keyword">super</span> viewDidDisappear:animated];</div><div class="line">    </div><div class="line">    <span class="comment">// 退出界面时  取消所有未完成的网络请求</span></div><div class="line">    [<span class="keyword">self</span> cancelAllOperation];</div><div class="line">&#125;    </div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
-<p>项目已上传至 github <a href="https://github.com/sevnqiao/NetWork.git" target="_blank" rel="external">NetWork简单封装的一套网络请求框架, 支持 NSURLSession / NSURLConnection</a></p>
+        <p>项目初期，项目经理提出一个需求，如下：</p>
+<blockquote>
+<p>每一个controller要单独管理自己的网络请求操作，在controller销毁的时候要取消掉相应的网络请求。</p>
+</blockquote>
+<p>为了整个项目统一，我们需要在基类中来实现，为了区别我们新建一个基类的<em>category</em>。<br>当然我们需要用一个数组来存放我们的操作，可是<em>category</em>又不能直接添加成员变量，那我们可以直接通过<em>runtime</em>来直接关联一个变量：<br>头文件如下：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;UIKit/UIKit.h&gt;</span></span></div><div class="line"><span class="class"><span class="keyword">@class</span> <span class="title">AFHTTPRequestOperation</span>;</span></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">UIViewController</span> (<span class="title">Operation</span>)</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>)<span class="built_in">NSMutableArray</span> *operations;</div><div class="line">-(<span class="keyword">void</span>)addOperation:(AFHTTPRequestOperation *)operation;</div><div class="line">-(<span class="keyword">void</span>)removeOperation:(AFHTTPRequestOperation *)operation;</div><div class="line">-(<span class="keyword">void</span>)cancelAllOperation;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
+<p>具体实现如下：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"UIViewController+Operation.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"XYQApi.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UIViewController</span> (<span class="title">Operation</span>)</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">char</span> kOperationKey;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)setOperations:(<span class="built_in">NSMutableArray</span> *)operations&#123;</div><div class="line">    <span class="keyword">if</span> (!operations) &#123;</div><div class="line">        operations = [[<span class="built_in">NSMutableArray</span> alloc]init];</div><div class="line">        objc_setAssociatedObject(<span class="keyword">self</span>, &amp;kOperationKey, operations, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">-(<span class="built_in">NSMutableArray</span> *)operations</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> objc_getAssociatedObject(<span class="keyword">self</span>, &amp;kOperationKey);</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)addOperation:(AFHTTPRequestOperation *)operation</div><div class="line">&#123;</div><div class="line">    [<span class="keyword">self</span>.operations addObject:operation];</div><div class="line">&#125;</div><div class="line">-(<span class="keyword">void</span>)removeOperation:(AFHTTPRequestOperation *)operation</div><div class="line">&#123;</div><div class="line">    [<span class="keyword">self</span>.operations removeObject:operation];</div><div class="line">&#125;</div><div class="line">-(<span class="keyword">void</span>)cancelAllOperation</div><div class="line">&#123;</div><div class="line">    <span class="keyword">for</span> (AFHTTPRequestOperation * op <span class="keyword">in</span> <span class="keyword">self</span>.operations) &#123;</div><div class="line">        [XYQApi cancelOperation:op];</div><div class="line">    &#125;</div><div class="line">    [<span class="keyword">self</span>.operations removeAllObjects];</div><div class="line">&#125;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
+<p>这样每一个controller都可以单独的管理自己的网络请求操作了</p>
 
       
     </div>
@@ -463,7 +464,7 @@ s.parentNode.insertBefore(bp, s);
           
             <a href="/tags/iOS/" rel="tag"># iOS</a>
           
-            <a href="/tags/网络/" rel="tag"># 网络</a>
+            <a href="/tags/runtime/" rel="tag"># runtime</a>
           
         </div>
       
@@ -476,8 +477,8 @@ s.parentNode.insertBefore(bp, s);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/07/cjs1kj80z000iynwdd9aztkp5/" rel="next" title="横向tableView">
-                <i class="fa fa-chevron-left"></i> 横向tableView
+              <a href="/2015/05/25/cjs1ls67l002d5fwdh743xx3i/" rel="next" title="利用runtime解决数组字典的崩溃问题">
+                <i class="fa fa-chevron-left"></i> 利用runtime解决数组字典的崩溃问题
               </a>
             
           </div>
@@ -486,8 +487,8 @@ s.parentNode.insertBefore(bp, s);
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/05/31/cjs1kj813000oynwdq7x0x981/" rel="prev" title="简书导航栏头像实现">
-                简书导航栏头像实现 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/12/07/cjs1ls61d00035fwdn3481l21/" rel="prev" title="json去空">
+                json去空 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

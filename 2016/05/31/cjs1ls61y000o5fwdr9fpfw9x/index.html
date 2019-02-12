@@ -98,17 +98,17 @@
 
 
 
-<meta name="description" content="前几天在项目中遇到一个需求，实现一个横向的左右滑动翻页进入上一条或下一条详情。刚看到的时候便有了几个想法： 1.pageviewcontroller 2.scoreView像轮播图一样用三个view奶实现 3.横向tableview 经过比较之后选择了第三种方式，原因无其他，重用机制，大量数据不会卡顿。 横向tableview先将tableview左旋转90度：123456789CGFloat f">
+<meta name="description" content="今天看了一下简书的用户界面的导航栏上的头像，于是想了一下其实现过程。 大家可以到简书客户端上看一下个人界面，可以看到以下几点：   向上移动头像会缩小，但是有下限 向下移动头像会放大，但是有上限 头像的起点y始终不变   代码实现首先，我们给导航条添加一个titleView：12345678910UIView *titleView = [[UIView alloc] init];self.navi">
 <meta name="keywords" content="iOS,tableView">
 <meta property="og:type" content="article">
-<meta property="og:title" content="横向tableView">
-<meta property="og:url" content="https://sevnqiao.github.io/2016/01/07/cjs1kj80z000iynwdd9aztkp5/index.html">
+<meta property="og:title" content="简书导航栏头像实现">
+<meta property="og:url" content="https://sevnqiao.github.io/2016/05/31/cjs1ls61y000o5fwdr9fpfw9x/index.html">
 <meta property="og:site_name" content="Sevn">
-<meta property="og:description" content="前几天在项目中遇到一个需求，实现一个横向的左右滑动翻页进入上一条或下一条详情。刚看到的时候便有了几个想法： 1.pageviewcontroller 2.scoreView像轮播图一样用三个view奶实现 3.横向tableview 经过比较之后选择了第三种方式，原因无其他，重用机制，大量数据不会卡顿。 横向tableview先将tableview左旋转90度：123456789CGFloat f">
-<meta property="og:updated_time" content="2019-02-12T06:42:22.787Z">
+<meta property="og:description" content="今天看了一下简书的用户界面的导航栏上的头像，于是想了一下其实现过程。 大家可以到简书客户端上看一下个人界面，可以看到以下几点：   向上移动头像会缩小，但是有下限 向下移动头像会放大，但是有上限 头像的起点y始终不变   代码实现首先，我们给导航条添加一个titleView：12345678910UIView *titleView = [[UIView alloc] init];self.navi">
+<meta property="og:updated_time" content="2019-02-12T06:41:34.497Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="横向tableView">
-<meta name="twitter:description" content="前几天在项目中遇到一个需求，实现一个横向的左右滑动翻页进入上一条或下一条详情。刚看到的时候便有了几个想法： 1.pageviewcontroller 2.scoreView像轮播图一样用三个view奶实现 3.横向tableview 经过比较之后选择了第三种方式，原因无其他，重用机制，大量数据不会卡顿。 横向tableview先将tableview左旋转90度：123456789CGFloat f">
+<meta name="twitter:title" content="简书导航栏头像实现">
+<meta name="twitter:description" content="今天看了一下简书的用户界面的导航栏上的头像，于是想了一下其实现过程。 大家可以到简书客户端上看一下个人界面，可以看到以下几点：   向上移动头像会缩小，但是有下限 向下移动头像会放大，但是有上限 头像的起点y始终不变   代码实现首先，我们给导航条添加一个titleView：12345678910UIView *titleView = [[UIView alloc] init];self.navi">
 
 
 
@@ -136,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="https://sevnqiao.github.io/2016/01/07/cjs1kj80z000iynwdd9aztkp5/"/>
+  <link rel="canonical" href="https://sevnqiao.github.io/2016/05/31/cjs1ls61y000o5fwdr9fpfw9x/"/>
 
 
 
 
 
-  <title>横向tableView | Sevn</title>
+  <title>简书导航栏头像实现 | Sevn</title>
   
 
 
@@ -296,7 +296,7 @@ s.parentNode.insertBefore(bp, s);
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2016/01/07/cjs1kj80z000iynwdd9aztkp5/">
+    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2016/05/31/cjs1ls61y000o5fwdr9fpfw9x/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiong.">
@@ -313,7 +313,7 @@ s.parentNode.insertBefore(bp, s);
 
         
         
-          <h1 class="post-title" itemprop="name headline">横向tableView</h1>
+          <h1 class="post-title" itemprop="name headline">简书导航栏头像实现</h1>
         
 
         <div class="post-meta">
@@ -325,8 +325,8 @@ s.parentNode.insertBefore(bp, s);
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-07T16:42:36+08:00">
-                2016-01-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-31T16:43:10+08:00">
+                2016-05-31
               </time>
             
 
@@ -392,7 +392,7 @@ s.parentNode.insertBefore(bp, s);
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  270
+                  305
                 </span>
               
 
@@ -426,16 +426,19 @@ s.parentNode.insertBefore(bp, s);
       
 
       
-        <p>前几天在项目中遇到一个需求，实现一个横向的左右滑动翻页进入上一条或下一条详情。<br>刚看到的时候便有了几个想法：</p>
-<pre><code>1.pageviewcontroller
-2.scoreView像轮播图一样用三个view奶实现
-3.横向tableview
-</code></pre><p>经过比较之后选择了第三种方式，原因无其他，重用机制，大量数据不会卡顿。</p>
-<h2 id="横向tableview"><a href="#横向tableview" class="headerlink" title="横向tableview"></a>横向tableview</h2><p>先将tableview左旋转90度：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">CGFloat</span> f = (kScreen_Height-kNavBar_Height-kScreen_Width)*<span class="number">0.5</span>;</div><div class="line"><span class="keyword">self</span>.myTableView = [[<span class="built_in">UITableView</span> alloc]initWithFrame:<span class="built_in">CGRectMake</span>(-f, f, kScreen_Height-kNavBar_Height, kScreen_Width) style:<span class="built_in">UITableViewStylePlain</span>];</div><div class="line"><span class="keyword">self</span>.myTableView.dataSource = <span class="keyword">self</span>;</div><div class="line"><span class="keyword">self</span>.myTableView.delegate = <span class="keyword">self</span>;</div><div class="line"><span class="keyword">self</span>.myTableView.transform = <span class="built_in">CGAffineTransformMakeRotation</span>(-M_PI/<span class="number">2</span>);</div><div class="line"><span class="keyword">self</span>.myTableView.backgroundColor = kColor_f2f2f2;</div><div class="line"><span class="keyword">self</span>.myTableView.pagingEnabled = <span class="literal">YES</span>;</div><div class="line"><span class="keyword">self</span>.myTableView.showsVerticalScrollIndicator = <span class="literal">NO</span>;</div><div class="line">[<span class="keyword">self</span>.view addSubview:<span class="keyword">self</span>.myTableView];</div></pre></td></tr></table></figure></p>
-<p>要使其旋转之后能刚好和屏幕一致，则<em>tableView</em>的<br>横坐标x为： -（屏幕高度-屏幕宽度）*0.5<br>纵坐标y为：（屏幕高度-屏幕宽度）*0.5<br>改变<em>tableview</em>的<em>transform</em><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">self</span>.myTableView.transform = <span class="built_in">CGAffineTransformMakeRotation</span>(-M_PI/<span class="number">2</span>);</div></pre></td></tr></table></figure></p>
-<p>这样旋转之后刚好和<em>controller</em>的<em>view</em>重合。</p>
-<h3 id="旋转cell"><a href="#旋转cell" class="headerlink" title="旋转cell"></a>旋转cell</h3><p>旋转tableview之后还需要将cell右向旋转90度：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cell.transform = <span class="built_in">CGAffineTransformMakeRotation</span>(M_PI/<span class="number">2</span>);</div></pre></td></tr></table></figure></p>
-<p>这样既可实现一个横向的<em>tableview</em>。</p>
+        <p>今天看了一下简书的用户界面的导航栏上的头像，于是想了一下其实现过程。</p>
+<p>大家可以到简书客户端上看一下个人界面，可以看到以下几点：</p>
+<blockquote>
+<ol>
+<li>向上移动头像会缩小，但是有下限</li>
+<li>向下移动头像会放大，但是有上限</li>
+<li>头像的起点y始终不变</li>
+</ol>
+</blockquote>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>首先，我们给导航条添加一个<em>titleView</em>：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIView</span> *titleView = [[<span class="built_in">UIView</span> alloc] init];</div><div class="line"><span class="keyword">self</span>.navigationItem.titleView = titleView;</div><div class="line"><span class="keyword">self</span>.headerImageView = [[<span class="built_in">UIImageView</span> alloc] init];</div><div class="line"><span class="keyword">self</span>.headerImageView.layer.cornerRadius = <span class="number">30</span>;</div><div class="line"><span class="keyword">self</span>.headerImageView.layer.masksToBounds = <span class="literal">YES</span>;</div><div class="line"><span class="keyword">self</span>.headerImageView.frame = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">60</span>, <span class="number">60</span>);</div><div class="line"><span class="keyword">self</span>.headerImageView.backgroundColor = [<span class="built_in">UIColor</span> redColor];</div><div class="line"><span class="comment">// 保证用户头像水平居中</span></div><div class="line"><span class="keyword">self</span>.headerImageView.center = <span class="built_in">CGPointMake</span>(titleView.center.x, <span class="number">0</span>);</div><div class="line">[titleView addSubview:<span class="keyword">self</span>.headerImageView];</div></pre></td></tr></table></figure></p>
+<p>接下来最关键的代码就是在滚动时处理缩放用户头像的了：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView </div><div class="line">&#123;</div><div class="line">    <span class="built_in">CGFloat</span> offsetY = scrollView.contentOffset.y + scrollView.contentInset.top;</div><div class="line">    <span class="built_in">CGFloat</span> scale = <span class="number">1.0</span>;</div><div class="line">    <span class="comment">// 放大</span></div><div class="line">    <span class="keyword">if</span> (offsetY &lt; <span class="number">0</span>) &#123;</div><div class="line">        scale = MIN(<span class="number">1.5</span>, <span class="number">1</span> - offsetY / <span class="number">300</span>);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (offsetY &gt; <span class="number">0</span>) &#123; </div><div class="line">    <span class="comment">// 缩小</span></div><div class="line">        scale = MAX(<span class="number">0.45</span>, <span class="number">1</span> - offsetY / <span class="number">300</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//进行缩放</span></div><div class="line">    <span class="keyword">self</span>.headerImageView.transform = <span class="built_in">CGAffineTransformMakeScale</span>(scale, scale);</div><div class="line">    <span class="comment">// 保证缩放后y坐标不变</span></div><div class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span>.headerImageView.frame;</div><div class="line">    frame.origin.y = -<span class="keyword">self</span>.headerImageView.layer.cornerRadius / <span class="number">2</span>;</div><div class="line">    <span class="keyword">self</span>.headerImageView.frame = frame;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>哈，就是如此简单，大家可以自己动手去试一下</p>
+<p><a href="https://github.com/sevnqiao/AVPlayer-" target="_blank" rel="external">gitbub地址</a> 欢迎star</p>
 
       
     </div>
@@ -480,8 +483,8 @@ s.parentNode.insertBefore(bp, s);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/07/cjs1kj80q0007ynwd6s4sdmu3/" rel="next" title="json去空">
-                <i class="fa fa-chevron-left"></i> json去空
+              <a href="/2016/03/27/cjs1ls61z000p5fwdginc2lek/" rel="next" title="网络框架">
+                <i class="fa fa-chevron-left"></i> 网络框架
               </a>
             
           </div>
@@ -490,8 +493,8 @@ s.parentNode.insertBefore(bp, s);
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/03/27/cjs1kj814000pynwdydi6bcp4/" rel="prev" title="网络框架">
-                网络框架 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/06/24/cjs1ls61p000e5fwdgsis4xn5/" rel="prev" title="文件夹的操作NSFileManager">
+                文件夹的操作NSFileManager <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -685,7 +688,7 @@ s.parentNode.insertBefore(bp, s);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#横向tableview"><span class="nav-number">1.</span> <span class="nav-text">横向tableview</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转cell"><span class="nav-number">1.1.</span> <span class="nav-text">旋转cell</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">1.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
             
 
           </div>

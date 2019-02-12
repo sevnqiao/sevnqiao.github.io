@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="iOS,项目实际," />
 
 
 
@@ -98,19 +98,17 @@
 
 
 
-<meta name="description" content="iOS 开发中一般有系统的UIVisualEffectView处理模糊效果，但是其模糊程度不好控制，很难到达想要的效果。不过我们可以采用 UIViewPropertyAnimator 实现该要求。 1234567891011121314151617181920212223242526- (void)viewDidLoad &amp;#123;    [super viewDidLoad];    self">
-<meta name="keywords" content="iOS">
+<meta name="description" content="我们在获取网络数据的时候，经常会遇到NSNull的问题，那我们如何去掉这个NsNull呢，1234567891011121314151617181920212223242526272829303132333435363738- (NSMutableDictionary *)dictionaryWithOutNull&amp;#123;    NSArray *keysArr = [self allKeys">
+<meta name="keywords" content="iOS,项目实际">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用UIViewPropertyAnimator 来控制毛玻璃">
-<meta property="og:url" content="https://sevnqiao.github.io/2018/08/07/cjs1kj80t000aynwd6m8fzly6/index.html">
+<meta property="og:title" content="json去空">
+<meta property="og:url" content="https://sevnqiao.github.io/2015/12/07/cjs1ls61d00035fwdn3481l21/index.html">
 <meta property="og:site_name" content="Sevn">
-<meta property="og:description" content="iOS 开发中一般有系统的UIVisualEffectView处理模糊效果，但是其模糊程度不好控制，很难到达想要的效果。不过我们可以采用 UIViewPropertyAnimator 实现该要求。 1234567891011121314151617181920212223242526- (void)viewDidLoad &amp;#123;    [super viewDidLoad];    self">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1783540-381624f7ee8622f9.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/228">
-<meta property="og:updated_time" content="2019-02-12T06:39:11.612Z">
+<meta property="og:description" content="我们在获取网络数据的时候，经常会遇到NSNull的问题，那我们如何去掉这个NsNull呢，1234567891011121314151617181920212223242526272829303132333435363738- (NSMutableDictionary *)dictionaryWithOutNull&amp;#123;    NSArray *keysArr = [self allKeys">
+<meta property="og:updated_time" content="2019-02-12T06:37:24.263Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用UIViewPropertyAnimator 来控制毛玻璃">
-<meta name="twitter:description" content="iOS 开发中一般有系统的UIVisualEffectView处理模糊效果，但是其模糊程度不好控制，很难到达想要的效果。不过我们可以采用 UIViewPropertyAnimator 实现该要求。 1234567891011121314151617181920212223242526- (void)viewDidLoad &amp;#123;    [super viewDidLoad];    self">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1783540-381624f7ee8622f9.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/228">
+<meta name="twitter:title" content="json去空">
+<meta name="twitter:description" content="我们在获取网络数据的时候，经常会遇到NSNull的问题，那我们如何去掉这个NsNull呢，1234567891011121314151617181920212223242526272829303132333435363738- (NSMutableDictionary *)dictionaryWithOutNull&amp;#123;    NSArray *keysArr = [self allKeys">
 
 
 
@@ -138,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="https://sevnqiao.github.io/2018/08/07/cjs1kj80t000aynwd6m8fzly6/"/>
+  <link rel="canonical" href="https://sevnqiao.github.io/2015/12/07/cjs1ls61d00035fwdn3481l21/"/>
 
 
 
 
 
-  <title>使用UIViewPropertyAnimator 来控制毛玻璃 | Sevn</title>
+  <title>json去空 | Sevn</title>
   
 
 
@@ -298,7 +296,7 @@ s.parentNode.insertBefore(bp, s);
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2018/08/07/cjs1kj80t000aynwd6m8fzly6/">
+    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2015/12/07/cjs1ls61d00035fwdn3481l21/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiong.">
@@ -315,7 +313,7 @@ s.parentNode.insertBefore(bp, s);
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用UIViewPropertyAnimator 来控制毛玻璃</h1>
+          <h1 class="post-title" itemprop="name headline">json去空</h1>
         
 
         <div class="post-meta">
@@ -327,8 +325,8 @@ s.parentNode.insertBefore(bp, s);
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-07T16:42:36+08:00">
-                2018-08-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-07T16:37:18+08:00">
+                2015-12-07
               </time>
             
 
@@ -352,6 +350,17 @@ s.parentNode.insertBefore(bp, s);
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/iOS/" itemprop="url" rel="index">
                     <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/项目实际/" itemprop="url" rel="index">
+                    <span itemprop="name">项目实际</span>
                   </a>
                 </span>
 
@@ -383,7 +392,7 @@ s.parentNode.insertBefore(bp, s);
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  151
+                  127
                 </span>
               
 
@@ -417,9 +426,7 @@ s.parentNode.insertBefore(bp, s);
       
 
       
-        <p>iOS 开发中一般有系统的UIVisualEffectView处理模糊效果，但是其模糊程度不好控制，很难到达想要的效果。不过我们可以采用 UIViewPropertyAnimator 实现该要求。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line"></div><div class="line">    <span class="keyword">self</span>.imageView = [[<span class="built_in">UIImageView</span> alloc]initWithFrame:<span class="keyword">self</span>.view.bounds];</div><div class="line">    <span class="keyword">self</span>.imageView.image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"test.jpg"</span>];</div><div class="line">    <span class="keyword">self</span>.imageView.contentMode = <span class="built_in">UIViewContentModeScaleAspectFill</span>;</div><div class="line">    [<span class="keyword">self</span>.view addSubview:<span class="keyword">self</span>.imageView];</div><div class="line">    </div><div class="line">    <span class="keyword">self</span>.effectView = [[<span class="built_in">UIVisualEffectView</span> alloc]initWithFrame:<span class="keyword">self</span>.view.bounds];</div><div class="line">    <span class="keyword">self</span>.effectView.effect = [<span class="built_in">UIBlurEffect</span> effectWithStyle:<span class="built_in">UIBlurEffectStyleLight</span>];</div><div class="line">    [<span class="keyword">self</span>.view addSubview:<span class="keyword">self</span>.effectView];</div><div class="line">    </div><div class="line">    <span class="keyword">self</span>.animator = [[<span class="built_in">UIViewPropertyAnimator</span> alloc] initWithDuration:<span class="number">0.1</span> curve:<span class="built_in">UIViewAnimationCurveLinear</span> animations:^&#123;</div><div class="line">        <span class="keyword">self</span>.effectView.effect = <span class="literal">nil</span>;</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="built_in">UISlider</span> *slider = [[<span class="built_in">UISlider</span> alloc]initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>, <span class="number">30</span>)];</div><div class="line">    [slider addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(sliderValueDidChange:) forControlEvents:<span class="built_in">UIControlEventValueChanged</span>];</div><div class="line">    [<span class="keyword">self</span>.view addSubview:slider];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)sliderValueDidChange:(<span class="built_in">UISlider</span> *)slider</div><div class="line">&#123;</div><div class="line">    <span class="keyword">self</span>.animator.fractionComplete = slider.value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>效果如下图所示：<br><img src="https://upload-images.jianshu.io/upload_images/1783540-381624f7ee8622f9.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/228" alt="毛玻璃渐变效果控制.gif"></p>
+        <p>我们在获取网络数据的时候，经常会遇到<em>NSNull</em>的问题，那我们如何去掉这个<em>NsNull</em>呢，<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">NSMutableDictionary</span> *)dictionaryWithOutNull</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSArray</span> *keysArr = [<span class="keyword">self</span> allKeys];</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSString</span> *keyStr <span class="keyword">in</span> keysArr)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">id</span> value = [<span class="keyword">self</span> objectForKey:keyStr];</div><div class="line">        <span class="keyword">if</span> ([value isKindOfClass:[<span class="built_in">NSNull</span> <span class="keyword">class</span>]])</div><div class="line">        &#123;</div><div class="line">            [<span class="keyword">self</span> setValue:<span class="string">@""</span> forKey:keyStr];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ([value isKindOfClass:[<span class="built_in">NSArray</span> <span class="keyword">class</span>]])</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">NSMutableArray</span> *valueArr = [<span class="built_in">NSMutableArray</span> arrayWithArray:value];</div><div class="line">            </div><div class="line">            <span class="keyword">for</span> (<span class="keyword">id</span> arrElements <span class="keyword">in</span> value)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> ([arrElements isKindOfClass:[<span class="built_in">NSDictionary</span> <span class="keyword">class</span>]])</div><div class="line">                &#123;</div><div class="line">                    <span class="built_in">NSMutableDictionary</span> *mutaDic = [<span class="built_in">NSMutableDictionary</span> dictionaryWithDictionary:arrElements];</div><div class="line">                    </div><div class="line">                    <span class="built_in">NSInteger</span> index = [valueArr indexOfObject:arrElements];</div><div class="line">                    <span class="built_in">NSDictionary</span> *subDic = (<span class="built_in">NSDictionary</span> *)[mutaDic dictionaryWithOutNull];</div><div class="line">                    [valueArr replaceObjectAtIndex:index withObject:subDic];</div><div class="line">                    </div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            [<span class="keyword">self</span> setValue:valueArr forKey:keyStr];</div><div class="line">            <span class="comment">//return dic;</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> ([value isKindOfClass:[<span class="built_in">NSDictionary</span> <span class="keyword">class</span>]])</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">NSMutableDictionary</span> *mutaDic = [<span class="built_in">NSMutableDictionary</span> dictionaryWithDictionary:value];</div><div class="line">            [<span class="keyword">self</span> setValue:[mutaDic dictionaryWithOutNull] forKey:keyStr];</div><div class="line">            <span class="comment">//return dic;</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -451,6 +458,8 @@ s.parentNode.insertBefore(bp, s);
           
             <a href="/tags/iOS/" rel="tag"># iOS</a>
           
+            <a href="/tags/项目实际/" rel="tag"># 项目实际</a>
+          
         </div>
       
 
@@ -462,8 +471,8 @@ s.parentNode.insertBefore(bp, s);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/29/cjs1kj80s0009ynwdn7l6hs65/" rel="next" title="wap 唤起App 的两种方式Schema & Universal Link">
-                <i class="fa fa-chevron-left"></i> wap 唤起App 的两种方式Schema & Universal Link
+              <a href="/2015/08/07/cjs1ls61h00075fwdi4ool6mm/" rel="next" title="RunTime添加属性">
+                <i class="fa fa-chevron-left"></i> RunTime添加属性
               </a>
             
           </div>
@@ -471,6 +480,10 @@ s.parentNode.insertBefore(bp, s);
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/07/cjs1ls61s000i5fwdxpkh7tja/" rel="prev" title="横向tableView">
+                横向tableView <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
