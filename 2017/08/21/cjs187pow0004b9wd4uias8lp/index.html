@@ -1,0 +1,826 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="collectionView编辑," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="最近因需要实现一个标签类的 demo, 需要支持拖拽重排, 首先想到的便是 collectionView, 并且很快就在 API 文档中找到了类似的接口: - (BOOL)beginInteractiveMovementForItemAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(9_0); - (void)updateInteracti">
+<meta name="keywords" content="collectionView编辑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS9之前collectionView拖拽重排的实现">
+<meta property="og:url" content="https://sevnqiao.github.io/2017/08/21/cjs187pow0004b9wd4uias8lp/index.html">
+<meta property="og:site_name" content="Sevn">
+<meta property="og:description" content="最近因需要实现一个标签类的 demo, 需要支持拖拽重排, 首先想到的便是 collectionView, 并且很快就在 API 文档中找到了类似的接口: - (BOOL)beginInteractiveMovementForItemAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(9_0); - (void)updateInteracti">
+<meta property="og:updated_time" content="2017-08-22T02:18:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS9之前collectionView拖拽重排的实现">
+<meta name="twitter:description" content="最近因需要实现一个标签类的 demo, 需要支持拖拽重排, 首先想到的便是 collectionView, 并且很快就在 API 文档中找到了类似的接口: - (BOOL)beginInteractiveMovementForItemAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(9_0); - (void)updateInteracti">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevnqiao.github.io/2017/08/21/cjs187pow0004b9wd4uias8lp/"/>
+
+
+
+
+
+  <title>iOS9之前collectionView拖拽重排的实现 | Sevn</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sevn</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">St you want to do.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-download">
+          <a href="/downloads/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-download"></i> <br />
+            
+            资源下载
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+<meta name="baidu-site-verification" content="60PULNoRpm" />
+
+<script>
+(function(){
+var bp = document.createElement('script');
+var curProtocol = window.location.protocol.split(':')[0];
+if (curProtocol === 'https') {
+bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+}
+else {
+bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+}
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2017/08/21/cjs187pow0004b9wd4uias8lp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiong.">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13326241?v=3&u=280855f8bfb84fd0ef8e1c385799f0d279084a9a&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sevn">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS9之前collectionView拖拽重排的实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T17:11:12+08:00">
+                2017-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CollectionView/" itemprop="url" rel="index">
+                    <span itemprop="name">CollectionView</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  897
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近因需要实现一个标签类的 demo, 需要支持拖拽重排, 首先想到的便是 collectionView, 并且很快就在 API 文档中找到了类似的接口:</p>
+<pre><code>- (BOOL)beginInteractiveMovementForItemAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_IOS(9_0);
+- (void)updateInteractiveMovementTargetPosition:(CGPoint)targetPosition NS_AVAILABLE_IOS(9_0);
+- (void)endInteractiveMovement NS_AVAILABLE_IOS(9_0);
+- (void)cancelInteractiveMovement NS_AVAILABLE_IOS(9_0);
+</code></pre><p>用系统提供的这几个接口很快便能实现我们的需求, 代码见 <a href="https://github.com/sevnqiao/CollectionViewDemo" target="_blank" rel="external">gitbub地址</a>.<br>但是你有没有发现上面的方法后面跟着的<em>NS_AVAILABLE_IOS(9_0)</em>, iOS9才开始支持, 这就尴尬了.<br>那iOS9之前怎么手动实现这个需求呢, 于是边分析边开始列出实现步骤:</p>
+<blockquote>
+<ol>
+<li>长按 cell 进入拖拽模式</li>
+<li>隐藏当前 cell, 并添加一个当前 cell 的截图到 collectionView 上</li>
+<li>随手势移动截图, 当截图的center 进入到另一个 cell2 的范围内的时候, 将隐藏的 cell 移动到cell2的位置, 并移动 cell2及cell2之后的 cell</li>
+<li>若继续移动, 则执行(3)</li>
+<li>若松开手指结束移动, 则移除掉截图, 并显示之前隐藏的 cell</li>
+</ol>
+</blockquote>
+<p>过程理顺了, 那么接下来便是代码的实现了.</p>
+<h5 id="1-长按-cell-进入拖拽模式"><a href="#1-长按-cell-进入拖拽模式" class="headerlink" title="1. 长按 cell 进入拖拽模式"></a><em>1. 长按 cell 进入拖拽模式</em></h5><p>我这里直接给 collectionView添加了一个长按手势</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UILongPressGestureRecognizer</span> *longG = [[<span class="built_in">UILongPressGestureRecognizer</span> alloc]initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(longPress:)];</div><div class="line">longG.minimumPressDuration = <span class="number">0.2</span>f;</div><div class="line">[<span class="keyword">self</span>.collectionView addGestureRecognizer:longG];</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)longPress:(<span class="built_in">UILongPressGestureRecognizer</span> *)lpGesture</div><div class="line">&#123;</div><div class="line">    <span class="keyword">switch</span>(lpGesture.state) &#123;</div><div class="line">        <span class="keyword">case</span> <span class="built_in">UIGestureRecognizerStateBegan</span>:</div><div class="line">        &#123;</div><div class="line">            [<span class="keyword">self</span> collectionViewCellDidBeginChange:lpGesture];</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">case</span> <span class="built_in">UIGestureRecognizerStateChanged</span>:</div><div class="line">        &#123;</div><div class="line">            [<span class="keyword">self</span> collectionViewCellDidChange:lpGesture];</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">case</span> <span class="built_in">UIGestureRecognizerStateEnded</span>:</div><div class="line">        &#123;</div><div class="line">            [<span class="keyword">self</span> collectionViewCellDidEndChange:lpGesture];</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">default</span>:</div><div class="line">            <span class="keyword">if</span> (<span class="built_in">AVAILABLE_IOS_9_0</span>)</div><div class="line">            &#123;</div><div class="line">                [<span class="keyword">self</span>.collectionView cancelInteractiveMovement];</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="2-隐藏当前-cell-并添加一个当前-cell-的截图到-collectionView-上"><a href="#2-隐藏当前-cell-并添加一个当前-cell-的截图到-collectionView-上" class="headerlink" title="2. 隐藏当前 cell, 并添加一个当前 cell 的截图到 collectionView 上"></a><em>2. 隐藏当前 cell, 并添加一个当前 cell 的截图到 collectionView 上</em></h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)collectionViewCellDidBeginChange:(<span class="built_in">UILongPressGestureRecognizer</span> *)lpGesture</div><div class="line">&#123;</div><div class="line">    <span class="keyword">self</span>.beginIndexPath = [<span class="keyword">self</span>.collectionView indexPathForItemAtPoint:[lpGesture locationInView:<span class="keyword">self</span>.collectionView]];</div><div class="line">    <span class="keyword">self</span>.beginCell = (CollectionViewCell *)[<span class="keyword">self</span>.collectionView cellForItemAtIndexPath:<span class="keyword">self</span>.beginIndexPath];</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> (<span class="built_in">AVAILABLE_IOS_9_0</span>)</div><div class="line">    &#123;</div><div class="line">        [<span class="keyword">self</span>.collectionView beginInteractiveMovementForItemAtIndexPath:<span class="keyword">self</span>.beginIndexPath];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 截图  并隐藏原 cell</span></div><div class="line">        <span class="keyword">self</span>.tempView = [<span class="keyword">self</span>.beginCell snapshotViewAfterScreenUpdates:<span class="literal">YES</span>];</div><div class="line">        <span class="keyword">self</span>.tempView.frame = <span class="keyword">self</span>.beginCell.frame;</div><div class="line">        [<span class="keyword">self</span>.collectionView addSubview:<span class="keyword">self</span>.tempView];</div><div class="line">        </div><div class="line">        <span class="keyword">self</span>.beginPoint = [lpGesture locationInView:<span class="keyword">self</span>.collectionView];</div><div class="line">        <span class="keyword">self</span>.beginCell.hidden = <span class="literal">YES</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="3-移动截图"><a href="#3-移动截图" class="headerlink" title="3. 移动截图"></a><em>3. 移动截图</em></h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)collectionViewCellDidChange:(<span class="built_in">UILongPressGestureRecognizer</span> *)lpGesture</div><div class="line">&#123;</div><div class="line">    <span class="built_in">CGPoint</span> targetPosion = [lpGesture locationInView:lpGesture.view];</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> (<span class="built_in">AVAILABLE_IOS_9_0</span>)</div><div class="line">    &#123;</div><div class="line">        [<span class="keyword">self</span>.collectionView updateInteractiveMovementTargetPosition:targetPosion];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">CGFloat</span> tranX = [lpGesture locationOfTouch:<span class="number">0</span> inView:<span class="keyword">self</span>.collectionView].x - <span class="keyword">self</span>.beginPoint.x;</div><div class="line">        <span class="built_in">CGFloat</span> tranY = [lpGesture locationOfTouch:<span class="number">0</span> inView:<span class="keyword">self</span>.collectionView].y - <span class="keyword">self</span>.beginPoint.y;</div><div class="line">        </div><div class="line">        <span class="comment">// 设置截图视图位置</span></div><div class="line">        <span class="keyword">self</span>.tempView.center = <span class="built_in">CGPointApplyAffineTransform</span>(<span class="keyword">self</span>.tempView.center, <span class="built_in">CGAffineTransformMakeTranslation</span>(tranX, tranY));</div><div class="line">        <span class="keyword">self</span>.beginPoint = [lpGesture locationOfTouch:<span class="number">0</span> inView:_collectionView];</div><div class="line">        </div><div class="line">        <span class="comment">// 计算截图视图和哪个cell相交</span></div><div class="line">        <span class="keyword">for</span> (<span class="built_in">UICollectionViewCell</span> *cell <span class="keyword">in</span> [_collectionView visibleCells])</div><div class="line">        &#123;</div><div class="line">            <span class="comment">//跳过隐藏的cell</span></div><div class="line">            <span class="keyword">if</span> ([_collectionView indexPathForCell:cell] == <span class="keyword">self</span>.beginIndexPath)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//计算中心距</span></div><div class="line">            <span class="built_in">CGFloat</span> space = sqrtf(pow(<span class="keyword">self</span>.tempView.center.x - cell.center.x, <span class="number">2</span>) + powf(<span class="keyword">self</span>.tempView.center.y - cell.center.y, <span class="number">2</span>));</div><div class="line">            </div><div class="line">            <span class="comment">//如果相交一半且两个视图Y的绝对值小于高度的一半就移动</span></div><div class="line">            <span class="keyword">if</span> (space &lt;= <span class="keyword">self</span>.tempView.bounds.size.width * <span class="number">0.5</span> &amp;&amp; (fabs(<span class="keyword">self</span>.tempView.center.y - cell.center.y) &lt;= <span class="keyword">self</span>.tempView.bounds.size.height * <span class="number">0.5</span>))</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">NSIndexPath</span> *nextIndexPath = [_collectionView indexPathForCell:cell];</div><div class="line">                </div><div class="line">                [<span class="keyword">self</span> updateDataWithSourceIndexPath:<span class="keyword">self</span>.beginIndexPath toIndexPath:nextIndexPath];</div><div class="line">                </div><div class="line">                [_collectionView moveItemAtIndexPath:<span class="keyword">self</span>.beginIndexPath toIndexPath:nextIndexPath];</div><div class="line">                </div><div class="line">                <span class="comment">//设置移动后的起始indexPath</span></div><div class="line">                <span class="keyword">self</span>.beginIndexPath = nextIndexPath;</div><div class="line">                </div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>数据源的改动</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)updateDataWithSourceIndexPath:(<span class="built_in">NSIndexPath</span> *)sourceIndexPath toIndexPath:(<span class="built_in">NSIndexPath</span> *)destinationIndexPath</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (sourceIndexPath.section == destinationIndexPath.section) <span class="comment">// 同一个 section 间移动</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (destinationIndexPath.item &gt; sourceIndexPath.item) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="built_in">NSUInteger</span> i = sourceIndexPath.item; i &lt; destinationIndexPath.item ; i ++) &#123;</div><div class="line">                [<span class="keyword">self</span>.dataArray[sourceIndexPath.section] exchangeObjectAtIndex:i withObjectAtIndex:i + <span class="number">1</span>];</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="built_in">NSUInteger</span> i = sourceIndexPath.item; i &gt; destinationIndexPath.item ; i --) &#123;</div><div class="line">                [<span class="keyword">self</span>.dataArray[sourceIndexPath.section] exchangeObjectAtIndex:i withObjectAtIndex:i - <span class="number">1</span>];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="comment">// 不同 section 之间移动 ,  删除 sourceData, 插入到 destinationData</span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">NSMutableArray</span> *sourceArr = <span class="keyword">self</span>.dataArray[sourceIndexPath.section];</div><div class="line">        <span class="built_in">NSMutableArray</span> *destinationArr = <span class="keyword">self</span>.dataArray[destinationIndexPath.section];</div><div class="line">        </div><div class="line">        <span class="keyword">id</span> obj = [sourceArr objectAtIndex:sourceIndexPath.row];</div><div class="line">        </div><div class="line">        [sourceArr removeObjectAtIndex:sourceIndexPath.row];</div><div class="line">        </div><div class="line">        [destinationArr insertObject:obj atIndex:destinationIndexPath.row];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="4-若继续移动-则执行-3"><a href="#4-若继续移动-则执行-3" class="headerlink" title="4. 若继续移动, 则执行(3)"></a><em>4. 若继续移动, 则执行(3)</em></h5><h5 id="5-若松开手指结束移动-则移除掉截图-并显示之前隐藏的-cell"><a href="#5-若松开手指结束移动-则移除掉截图-并显示之前隐藏的-cell" class="headerlink" title="5. 若松开手指结束移动, 则移除掉截图, 并显示之前隐藏的 cell"></a><em>5. 若松开手指结束移动, 则移除掉截图, 并显示之前隐藏的 cell</em></h5><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)collectionViewCellDidEndChange:(<span class="built_in">UILongPressGestureRecognizer</span> *)lpGesture</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="built_in">AVAILABLE_IOS_9_0</span>)</div><div class="line">    &#123;</div><div class="line">        [<span class="keyword">self</span>.collectionView endInteractiveMovement];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        [<span class="built_in">UIView</span> animateWithDuration:<span class="number">0.25</span> animations:^&#123;</div><div class="line">            </div><div class="line">            <span class="keyword">self</span>.tempView.center = <span class="keyword">self</span>.beginCell.center;</div><div class="line">            </div><div class="line">        &#125;completion:^(<span class="built_in">BOOL</span> finished) &#123;</div><div class="line">            </div><div class="line">            [<span class="keyword">self</span>.tempView removeFromSuperview];</div><div class="line">            <span class="keyword">self</span>.beginCell.hidden = <span class="literal">NO</span>;</div><div class="line">        &#125;];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>好了, 到此就完成了 iOS9以下的适配, 实现起来也不是很复杂, 主要的是实现之前把思路理顺, 那实现起来就不难了.</p>
+<p>详细的代码见<a href="https://github.com/sevnqiao/CollectionViewDemo" target="_blank" rel="external">gitbub地址</a>.如果有收获,欢迎 star!</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/collectionView编辑/" rel="tag"># collectionView编辑</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/21/cjs187pp6000hb9wdyrg55ooz/" rel="next" title="立个flag">
+                <i class="fa fa-chevron-left"></i> 立个flag
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/25/cjs187ptz000zb9wdm9dadfyi/" rel="prev" title="ChartView折线图+饼状图">
+                ChartView折线图+饼状图 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/13326241?v=3&u=280855f8bfb84fd0ef8e1c385799f0d279084a9a&s=400"
+               alt="Xiong." />
+          <p class="site-author-name" itemprop="name">Xiong.</p>
+           
+              <p class="site-description motion-element" itemprop="description">Do it ,if you have some time.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevnqiao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/e5fd37b19560" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-wpforms"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="Next主题配置文档" target="_blank">Next主题配置文档</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://hexo.io/docs/" title="Hexo官方配置文档" target="_blank">Hexo官方配置文档</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=110 src="//music.163.com/outchain/player?type=0&id=779925371&auto=0&height=90"></iframe>
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-长按-cell-进入拖拽模式"><span class="nav-number">1.</span> <span class="nav-text">1. 长按 cell 进入拖拽模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-隐藏当前-cell-并添加一个当前-cell-的截图到-collectionView-上"><span class="nav-number">2.</span> <span class="nav-text">2. 隐藏当前 cell, 并添加一个当前 cell 的截图到 collectionView 上</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-移动截图"><span class="nav-number">3.</span> <span class="nav-text">3. 移动截图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-若继续移动-则执行-3"><span class="nav-number">4.</span> <span class="nav-text">4. 若继续移动, 则执行(3)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-若松开手指结束移动-则移除掉截图-并显示之前隐藏的-cell"><span class="nav-number">5.</span> <span class="nav-text">5. 若松开手指结束移动, 则移除掉截图, 并显示之前隐藏的 cell</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiong.</span>
+<p>
+Yesterday you said tomorrow.<Br/>
+</p>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,829 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT, ios, iOS, iPhone, APP, blog" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="前言  我们在平时的工作中经常会遇到这样一种情况，当我们从后台请求到的数据，需要把其中一个插入到数组的时候，需要先判断该对象是否为空值，非空才能插入，否则会引起崩溃。 那么有没有一种方式，可以从根本上解决，即使我插入的是空值，也不会引起崩溃呢:   继承于这个类，然后通过重写方法（很常用，比如基类控制器，可以在视图加载完成时做一些公共的配置等） 通过类别重写方法，暴力抢先（此法太暴力，尽量不要这么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用runtime解决数组字典的崩溃问题">
+<meta property="og:url" content="https://sevnqiao.github.io/2015/05/25/cjs187pu10010b9wdm1e0x941/index.html">
+<meta property="og:site_name" content="Sevn">
+<meta property="og:description" content="前言  我们在平时的工作中经常会遇到这样一种情况，当我们从后台请求到的数据，需要把其中一个插入到数组的时候，需要先判断该对象是否为空值，非空才能插入，否则会引起崩溃。 那么有没有一种方式，可以从根本上解决，即使我插入的是空值，也不会引起崩溃呢:   继承于这个类，然后通过重写方法（很常用，比如基类控制器，可以在视图加载完成时做一些公共的配置等） 通过类别重写方法，暴力抢先（此法太暴力，尽量不要这么">
+<meta property="og:updated_time" content="2017-08-01T01:54:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用runtime解决数组字典的崩溃问题">
+<meta name="twitter:description" content="前言  我们在平时的工作中经常会遇到这样一种情况，当我们从后台请求到的数据，需要把其中一个插入到数组的时候，需要先判断该对象是否为空值，非空才能插入，否则会引起崩溃。 那么有没有一种方式，可以从根本上解决，即使我插入的是空值，也不会引起崩溃呢:   继承于这个类，然后通过重写方法（很常用，比如基类控制器，可以在视图加载完成时做一些公共的配置等） 通过类别重写方法，暴力抢先（此法太暴力，尽量不要这么">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sevnqiao.github.io/2015/05/25/cjs187pu10010b9wdm1e0x941/"/>
+
+
+
+
+
+  <title>利用runtime解决数组字典的崩溃问题 | Sevn</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sevn</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">St you want to do.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-download">
+          <a href="/downloads/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-download"></i> <br />
+            
+            资源下载
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+<meta name="baidu-site-verification" content="60PULNoRpm" />
+
+<script>
+(function(){
+var bp = document.createElement('script');
+var curProtocol = window.location.protocol.split(':')[0];
+if (curProtocol === 'https') {
+bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+}
+else {
+bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+}
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2015/05/25/cjs187pu10010b9wdm1e0x941/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xiong.">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13326241?v=3&u=280855f8bfb84fd0ef8e1c385799f0d279084a9a&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sevn">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">利用runtime解决数组字典的崩溃问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-25T20:28:20+08:00">
+                2015-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/RunTime/" itemprop="url" rel="index">
+                    <span itemprop="name">RunTime</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,137
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  我们在平时的工作中经常会遇到这样一种情况，当我们从后台请求到的数据，需要把其中一个插入到数组的时候，需要先判断该对象是否为空值，非空才能插入，否则会引起崩溃。</p>
+<p>那么有没有一种方式，可以从根本上解决，即使我插入的是空值，也不会引起崩溃呢:</p>
+<blockquote>
+<ol>
+<li>继承于这个类，然后通过重写方法（很常用，比如基类控制器，可以在视图加载完成时做一些公共的配置等）</li>
+<li>通过类别重写方法，暴力抢先（此法太暴力，尽量不要这么做）</li>
+<li><em>swizzling</em>（本文特讲内容）</li>
+</ol>
+</blockquote>
+<h2 id="Swizzling原理"><a href="#Swizzling原理" class="headerlink" title="Swizzling原理"></a>Swizzling原理</h2><p>在<em>Objective-C</em>中调用一个方法，其实是向一个对象发送消息，而查找消息的唯一依据是<em>selector</em>的名字。所以，我们可以利用<em>Objective-C</em>的<em>runtime</em>机制，实现在运行时交换<em>selector</em>对应的方法实现以达到我们的目的。</p>
+<p>每个类都有一个方法列表，存放着<em>selector</em>的名字和方法实现的映射关系。<em>IMP</em>有点类似函数指针，指向具体的<em>Method</em>实现。</p>
+<p>但是，现在我们要做的就是把链接线解开，然后连到我们自定义的函数的<em>IMP</em>上。当然，交换了两个<em>SEL</em>的<em>IMP</em>，还是可以再次交换回来了。</p>
+<p>我们通过<em>swizzling</em>特性，将<em>selectorC</em>的方法实现<em>IMPc</em>与<em>selectorN</em>的方法实现<em>IMPn</em>交换了，当我们调用<em>selectorC</em>，也就是给对象发送<em>selectorC</em>消息时，所查找到的对应的方法实现就是<em>IMPn</em>而不是<em>IMPc</em>了。</p>
+<h3 id="在-load方法中交换"><a href="#在-load方法中交换" class="headerlink" title="在+load方法中交换"></a>在+load方法中交换</h3><p><em>Swizzling</em>应该在<em>+load</em>方法中实现，因为<em>+load</em>方法可以保证在类最开始加载时会调用。因为<em>method swizzling</em>的影响范围是全局的，所以应该放在最保险的地方来处理是非常重要的。<em>+load</em>能够保证在类初始化的时候一定会被加载，这可以保证统一性。试想一下，若是在实际时需要的时候才去交换，那么无法达到全局处理的效果，而且若是临时使用的，在使用后没有及时地使用<em>swizzling</em>将系统方法与我们自定义的方法实现交换回来，那么后续的调用系统API就可能出问题。</p>
+<p>类文件在工程中，一定会加载，因此可以保证+load会被调用。</p>
+<h3 id="不要在-initialize中交换"><a href="#不要在-initialize中交换" class="headerlink" title="不要在+initialize中交换"></a>不要在+initialize中交换</h3><p><em>+initialize</em>是类第一次初始化时才会被调用，因为这个类有可能一直都没有使用到，因此这个类可能永远不会被调用。</p>
+<p>类文件虽然在工程中，但是如果没有任何地方调用过，那么是不会调用<em>+initialize</em>方法的。</p>
+<h3 id="使用dispatch-once保证只交换一次"><a href="#使用dispatch-once保证只交换一次" class="headerlink" title="使用dispatch_once保证只交换一次"></a>使用dispatch_once保证只交换一次</h3><p>方法交换应该要线程安全，而且保证只交换一次，除非只是临时交换使用，在使用完成后又交换回来。</p>
+<p>最常用的用法是在<em>+load</em>方法中使用<em>dispatch_once</em>来保证交换是安全的。因为<em>swizzling</em>会改变全局，我们需要在运行时采取相应的防范措施。保证原子操作就是一个措施，确保代码即使在多线程环境下也只会被执行一次。而<em>diapatch_once</em>就提供这些保障，因此我们应该将其加入到swizzling的使用标准规范中。</p>
+<h2 id="通用交换IMP写法"><a href="#通用交换IMP写法" class="headerlink" title="通用交换IMP写法"></a>通用交换IMP写法</h2><p>网上有很多的版本，但是有很多是不全面的，考虑的范围不够全面。下面我们来写一个通用的写法，现在扩展到<em>NSObject</em>中，因为<em>NSObject</em>是根类，这样其它类都可以使用了：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSObject</span> (<span class="title">Swizzling</span>) </span></div><div class="line">+ (<span class="keyword">void</span>)swizzleSelector:(SEL)originalSelector withSwizzledSelector:(SEL)swizzledSelector; </div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"NSObject+Swizzling.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">// 实现代码如下</span></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSObject</span> (<span class="title">Swizzling</span>)</span></div><div class="line"></div><div class="line">+ (<span class="keyword">void</span>)swizzleSelector:(SEL)originalSelector withSwizzledSelector:(SEL)swizzledSelector </div><div class="line">&#123;</div><div class="line">    Class <span class="keyword">class</span> = [<span class="keyword">self</span> <span class="keyword">class</span>];</div><div class="line"></div><div class="line">    Method originalMethod = class_getInstanceMethod(<span class="keyword">class</span>, originalSelector);</div><div class="line"></div><div class="line">    Method swizzledMethod = class_getInstanceMethod(<span class="keyword">class</span>, swizzledSelector);</div><div class="line"></div><div class="line">    <span class="comment">// 若已经存在，则添加会失败</span></div><div class="line">    <span class="built_in">BOOL</span> didAddMethod = class_addMethod(<span class="keyword">class</span>,originalSelector,method_getImplementation(swizzledMethod),method_getTypeEncoding(swizzledMethod));</div><div class="line"></div><div class="line">    <span class="comment">// 若原来的方法并不存在，则添加即可</span></div><div class="line">    <span class="keyword">if</span> (didAddMethod) &#123;</div><div class="line">        class_replaceMethod(<span class="keyword">class</span>, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">            method_exchangeImplementations(originalMethod,swizzledMethod);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>因为方法可能不是在这个类里，可能是在其父类中才有实现，因此先尝试添加方法的实现，若添加成功了，则直接替换一下实现即可。若添加失败了，说明已经存在这个方法实现了，则只需要交换这两个方法的实现就可以了。</p>
+<p>尽量使用<strong>method_exchangeImplementations</strong>函数来交换，因为它是原子操作的，线程安全。尽量不要自己手动写这样的代码：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">IMP imp1 = method_getImplementation(m1);</div><div class="line">IMP imp2 = method_getImplementation(m2);</div><div class="line">method_setImplementation(m1, imp2);</div><div class="line">method_setImplementation(m2, imp1);</div></pre></td></tr></table></figure></p>
+<p>虽然<strong>method_exchangeImplementations</strong>函数的本质也是这么写法，但是它内部做了线程安全处理。</p>
+<h2 id="简单使用swizzling"><a href="#简单使用swizzling" class="headerlink" title="简单使用swizzling"></a>简单使用swizzling</h2><p>最简单的方法实现交换如下：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Method originalMethod = class_getInstanceMethod([<span class="built_in">NSArray</span> <span class="keyword">class</span>], <span class="keyword">@selector</span>(lastObject));</div><div class="line">Method newMedthod = class_getInstanceMethod([<span class="built_in">NSArray</span> <span class="keyword">class</span>], <span class="built_in">NSSelectorFromString</span>(<span class="string">@"safeLastObject"</span>));</div><div class="line">method_exchangeImplementations(originalMethod, newMedthod);</div><div class="line"> </div><div class="line"><span class="comment">// NSArray提供了这样的实现</span></div><div class="line">- (<span class="keyword">id</span>) safeLastObject &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>.count == <span class="number">0</span>) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%s 数组为空，直接返回nil"</span>, __FUNCTION__);</div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> [<span class="keyword">self</span> safeLastObject];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>看到<em>safeLastObject</em>这个方法递归调用自己了吗？为什么不是调用<em>return [self safeLastObject]</em>？因为我们交换了方法的实现，那么系统在调用<em>safeLastObject</em>方法是，找的是<em>safeLastObject</em>方法的实现，而手动调用<em>safeLastObject</em>方法时，会调用<em>safeLastObject</em>方法的实现。不清楚？回到前面看一看那个交换<em>IMP</em>的图吧！</p>
+<p>我们通过使用<em>swizzling</em>只是为了添加个打印？当然不是，我们还可以做很多事的。比如，上面我们还做了防崩溃处理。</p>
+<h2 id="NSMutableArray扩展交换处理崩溃"><a href="#NSMutableArray扩展交换处理崩溃" class="headerlink" title="NSMutableArray扩展交换处理崩溃"></a>NSMutableArray扩展交换处理崩溃</h2><p>还记得那些调用数组的<em>addObject:</em>方法加入一个<em>nil</em>值是的崩溃情景吗？还记得<em>[__NSPlaceholderArray initWithObjects:count:]</em>因为有<em>nil</em>值而崩溃的提示吗？还记得调用<em>objectAtIndex:</em>时出现崩溃提示<em>empty</em>数组问题吗？那么通过<em>swizzling</em>特性，我们可以做到不让它崩溃，而只是打印一些有用的日志信息。</p>
+<p>我们先来看看<em>NSMutableArray</em>的扩展实现：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"NSMutableArray+Swizzling.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"NSObject+Swizzling.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSMutableArray</span> (<span class="title">Swizzling</span>)</span></div><div class="line"> </div><div class="line">+ (<span class="keyword">void</span>)load &#123;</div><div class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</div><div class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</div><div class="line">        [<span class="keyword">self</span> swizzleSelector:<span class="keyword">@selector</span>(removeObject:)withSwizzledSelector:<span class="keyword">@selector</span>(safeRemoveObject:)];</div><div class="line">        [objc_getClass(<span class="string">"__NSArrayM"</span>) swizzleSelector:<span class="keyword">@selector</span>(addObject:) withSwizzledSelector:<span class="keyword">@selector</span>(safeAddObject:)];</div><div class="line">        [objc_getClass(<span class="string">"__NSArrayM"</span>) swizzleSelector:<span class="keyword">@selector</span>(removeObjectAtIndex:) withSwizzledSelector:<span class="keyword">@selector</span>(safeRemoveObjectAtIndex:)];</div><div class="line">        [objc_getClass(<span class="string">"__NSArrayM"</span>) swizzleSelector:<span class="keyword">@selector</span>(insertObject:atIndex:) withSwizzledSelector:<span class="keyword">@selector</span>(safeInsertObject:atIndex:)];</div><div class="line">        [objc_getClass(<span class="string">"__NSPlaceholderArray"</span>) swizzleSelector:<span class="keyword">@selector</span>(initWithObjects:count:) withSwizzledSelector:<span class="keyword">@selector</span>(safeInitWithObjects:count:)];</div><div class="line">        [objc_getClass(<span class="string">"__NSArrayM"</span>) swizzleSelector:<span class="keyword">@selector</span>(objectAtIndex:) withSwizzledSelector:<span class="keyword">@selector</span>(safeObjectAtIndex:)];</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">instancetype</span>)safeInitWithObjects:(<span class="keyword">const</span> <span class="keyword">id</span>  _Nonnull     __<span class="keyword">unsafe_unretained</span> *)objects count:(<span class="built_in">NSUInteger</span>)cnt</div><div class="line">&#123;</div><div class="line">    <span class="built_in">BOOL</span> hasNilObject = <span class="literal">NO</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSUInteger</span> i = <span class="number">0</span>; i &lt; cnt; i++) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> ([objects[i] isKindOfClass:[<span class="built_in">NSArray</span> <span class="keyword">class</span>]])</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, objects[i]);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (objects[i] == <span class="literal">nil</span>)</div><div class="line">        &#123;</div><div class="line">            hasNilObject = <span class="literal">YES</span>;</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"%s object at index %lu is nil, it will be     filtered"</span>, __FUNCTION__, i);</div><div class="line">      </div><div class="line">        <span class="comment">//#if DEBUG</span></div><div class="line">        <span class="comment">//      // 如果可以对数组中为nil的元素信息打印出来，增加更容       易读懂的日志信息，这对于我们改bug就好定位多了</span></div><div class="line">        <span class="comment">//      NSString *errorMsg = [NSString     stringWithFormat:@"数组元素不能为nil，其index为: %lu", i];</span></div><div class="line">        <span class="comment">//      NSAssert(objects[i] != nil, errorMsg);</span></div><div class="line">        <span class="comment">//#endif</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">  </div><div class="line"><span class="comment">// 因为有值为nil的元素，那么我们可以过滤掉值为nil的元素</span></div><div class="line">    <span class="keyword">if</span> (hasNilObject) &#123;</div><div class="line">        <span class="keyword">id</span> __<span class="keyword">unsafe_unretained</span> newObjects[cnt];</div><div class="line">        <span class="built_in">NSUInteger</span> index = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="built_in">NSUInteger</span> i = <span class="number">0</span>; i &lt; cnt; ++i) &#123;</div><div class="line">           <span class="keyword">if</span> (objects[i] != <span class="literal">nil</span>) &#123;</div><div class="line">              newObjects[index++] = objects[i];</div><div class="line">            &#125;</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">return</span> [<span class="keyword">self</span> safeInitWithObjects:newObjects count:index];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> [<span class="keyword">self</span> safeInitWithObjects:objects count:cnt];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)safeAddObject:(<span class="keyword">id</span>)obj &#123;</div><div class="line">    <span class="keyword">if</span> (obj == <span class="literal">nil</span>) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%s can add nil object into NSMutableArray"</span>, __FUNCTION__);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        [<span class="keyword">self</span> safeAddObject:obj];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)safeRemoveObject:(<span class="keyword">id</span>)obj &#123;</div><div class="line">    <span class="keyword">if</span> (obj == <span class="literal">nil</span>) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%s call -removeObject:, but argument obj is nil"</span>, __FUNCTION__);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    [<span class="keyword">self</span> safeRemoveObject:obj];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)safeInsertObject:(<span class="keyword">id</span>)anObject atIndex:(<span class="built_in">NSUInteger</span>)index &#123;</div><div class="line">    <span class="keyword">if</span> (anObject == <span class="literal">nil</span>) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%s can't insert nil into NSMutableArray"</span>, __FUNCTION__);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (index &gt; <span class="keyword">self</span>.count) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%s index is invalid"</span>, __FUNCTION__);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        [<span class="keyword">self</span> safeInsertObject:anObject atIndex:index];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">id</span>)safeObjectAtIndex:(<span class="built_in">NSUInteger</span>)index &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>.count == <span class="number">0</span>) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%s can't get any object from an empty array"</span>, __FUNCTION__);</div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (index &gt; <span class="keyword">self</span>.count) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%s index out of bounds in array"</span>, __FUNCTION__);</div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> [<span class="keyword">self</span> safeObjectAtIndex:index];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)safeRemoveObjectAtIndex:(<span class="built_in">NSUInteger</span>)index &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>.count &lt;= <span class="number">0</span>) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%s can't get any object from an empty array"</span>, __FUNCTION__);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (index &gt;= <span class="keyword">self</span>.count) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%s index out of bound"</span>, __FUNCTION__);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    [<span class="keyword">self</span> safeRemoveObjectAtIndex:index];</div><div class="line">&#125;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>然后，我们测试<em>nil</em>值的情况，是否还会崩溃呢？<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSMutableArray</span> *array = [@[<span class="string">@"value"</span>, <span class="string">@"value1"</span>]     mutableCopy];</div><div class="line">[array lastObject];</div><div class="line">  </div><div class="line">[array removeObject:<span class="string">@"value"</span>];</div><div class="line">[array removeObject:<span class="literal">nil</span>];</div><div class="line">[array addObject:<span class="string">@"12"</span>];</div><div class="line">[array addObject:<span class="literal">nil</span>];</div><div class="line">[array insertObject:<span class="literal">nil</span> atIndex:<span class="number">0</span>];</div><div class="line">[array insertObject:<span class="string">@"sdf"</span> atIndex:<span class="number">10</span>];</div><div class="line">[array objectAtIndex:<span class="number">100</span>];</div><div class="line">[array removeObjectAtIndex:<span class="number">10</span>];</div><div class="line">  </div><div class="line"><span class="built_in">NSMutableArray</span> *anotherArray = [[<span class="built_in">NSMutableArray</span> alloc] init];</div><div class="line">[anotherArray objectAtIndex:<span class="number">0</span>];</div><div class="line">  </div><div class="line"><span class="built_in">NSString</span> *nilStr = <span class="literal">nil</span>;</div><div class="line"><span class="built_in">NSArray</span> *array1 = @[<span class="string">@"ara"</span>, <span class="string">@"sdf"</span>, <span class="string">@"dsfdsf"</span>, nilStr];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"array1.count = %lu"</span>, array1.count);</div><div class="line">  </div><div class="line"><span class="comment">// 测试数组中有数组</span></div><div class="line"><span class="built_in">NSArray</span> *array2 = @[@[<span class="string">@"12323"</span>, <span class="string">@"nsdf"</span>, nilStr],     @[<span class="string">@"sdf"</span>, <span class="string">@"nilsdf"</span>, nilStr, <span class="string">@"sdhfodf"</span>]];</div></pre></td></tr></table></figure></p>
+<p>哈哈，都不崩溃了，而且还打印出崩溃原因。是不是很神奇？如果充分利用这种特性，是不是可以给我们带来很多便利之处？</p>
+<p>上面只是<em>swizzling</em>的一种应用场景而已。其实利用<em>swizzling</em>特性还可以做很多事情的，比如处理按钮重复点击问题等。</p>
+<p>[TOC]</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/07/cjs187por0002b9wd4ytz8vur/" rel="prev" title="RunTime添加属性">
+                RunTime添加属性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars1.githubusercontent.com/u/13326241?v=3&u=280855f8bfb84fd0ef8e1c385799f0d279084a9a&s=400"
+               alt="Xiong." />
+          <p class="site-author-name" itemprop="name">Xiong.</p>
+           
+              <p class="site-description motion-element" itemprop="description">Do it ,if you have some time.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sevnqiao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/e5fd37b19560" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-wpforms"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" title="Next主题配置文档" target="_blank">Next主题配置文档</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://hexo.io/docs/" title="Hexo官方配置文档" target="_blank">Hexo官方配置文档</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=110 src="//music.163.com/outchain/player?type=0&id=779925371&auto=0&height=90"></iframe>
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swizzling原理"><span class="nav-number">2.</span> <span class="nav-text">Swizzling原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在-load方法中交换"><span class="nav-number">2.1.</span> <span class="nav-text">在+load方法中交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要在-initialize中交换"><span class="nav-number">2.2.</span> <span class="nav-text">不要在+initialize中交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用dispatch-once保证只交换一次"><span class="nav-number">2.3.</span> <span class="nav-text">使用dispatch_once保证只交换一次</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通用交换IMP写法"><span class="nav-number">3.</span> <span class="nav-text">通用交换IMP写法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单使用swizzling"><span class="nav-number">4.</span> <span class="nav-text">简单使用swizzling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSMutableArray扩展交换处理崩溃"><span class="nav-number">5.</span> <span class="nav-text">NSMutableArray扩展交换处理崩溃</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiong.</span>
+<p>
+Yesterday you said tomorrow.<Br/>
+</p>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
