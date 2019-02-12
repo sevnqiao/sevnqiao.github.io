@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS,tableView," />
+  <meta name="keywords" content="闲谈人生," />
 
 
 
@@ -98,17 +98,17 @@
 
 
 
-<meta name="description" content="今天看了一下简书的用户界面的导航栏上的头像，于是想了一下其实现过程。 大家可以到简书客户端上看一下个人界面，可以看到以下几点：   向上移动头像会缩小，但是有下限 向下移动头像会放大，但是有上限 头像的起点y始终不变   代码实现首先，我们给导航条添加一个titleView：12345678910UIView *titleView = [[UIView alloc] init];self.navi">
-<meta name="keywords" content="iOS,tableView">
+<meta name="description" content="最近一直想多写些blog, 但是项目一忙就耽搁下来了, 不扯这些歪理由了, 说白了就是人变懒了, 今天立个flag, 自我监督, 以后每月至少一篇质量的总结.  「I don’t care if you suck at writing. I don’t care if nobody reads your blog. I don’t care if you have nothing interest">
+<meta name="keywords" content="闲谈人生">
 <meta property="og:type" content="article">
-<meta property="og:title" content="简书导航栏头像实现">
-<meta property="og:url" content="https://sevnqiao.github.io/2016/05/31/cjs1k968y000pwhwdk1bo1jov/index.html">
+<meta property="og:title" content="立个flag">
+<meta property="og:url" content="https://sevnqiao.github.io/2017/07/21/cjs1kj811000kynwd63tneyuc/index.html">
 <meta property="og:site_name" content="Sevn">
-<meta property="og:description" content="今天看了一下简书的用户界面的导航栏上的头像，于是想了一下其实现过程。 大家可以到简书客户端上看一下个人界面，可以看到以下几点：   向上移动头像会缩小，但是有下限 向下移动头像会放大，但是有上限 头像的起点y始终不变   代码实现首先，我们给导航条添加一个titleView：12345678910UIView *titleView = [[UIView alloc] init];self.navi">
-<meta property="og:updated_time" content="2019-02-12T06:41:34.497Z">
+<meta property="og:description" content="最近一直想多写些blog, 但是项目一忙就耽搁下来了, 不扯这些歪理由了, 说白了就是人变懒了, 今天立个flag, 自我监督, 以后每月至少一篇质量的总结.  「I don’t care if you suck at writing. I don’t care if nobody reads your blog. I don’t care if you have nothing interest">
+<meta property="og:updated_time" content="2019-02-12T07:05:12.101Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="简书导航栏头像实现">
-<meta name="twitter:description" content="今天看了一下简书的用户界面的导航栏上的头像，于是想了一下其实现过程。 大家可以到简书客户端上看一下个人界面，可以看到以下几点：   向上移动头像会缩小，但是有下限 向下移动头像会放大，但是有上限 头像的起点y始终不变   代码实现首先，我们给导航条添加一个titleView：12345678910UIView *titleView = [[UIView alloc] init];self.navi">
+<meta name="twitter:title" content="立个flag">
+<meta name="twitter:description" content="最近一直想多写些blog, 但是项目一忙就耽搁下来了, 不扯这些歪理由了, 说白了就是人变懒了, 今天立个flag, 自我监督, 以后每月至少一篇质量的总结.  「I don’t care if you suck at writing. I don’t care if nobody reads your blog. I don’t care if you have nothing interest">
 
 
 
@@ -136,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="https://sevnqiao.github.io/2016/05/31/cjs1k968y000pwhwdk1bo1jov/"/>
+  <link rel="canonical" href="https://sevnqiao.github.io/2017/07/21/cjs1kj811000kynwd63tneyuc/"/>
 
 
 
 
 
-  <title>简书导航栏头像实现 | Sevn</title>
+  <title>立个flag | Sevn</title>
   
 
 
@@ -296,7 +296,7 @@ s.parentNode.insertBefore(bp, s);
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2016/05/31/cjs1k968y000pwhwdk1bo1jov/">
+    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2017/07/21/cjs1kj811000kynwd63tneyuc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiong.">
@@ -313,7 +313,7 @@ s.parentNode.insertBefore(bp, s);
 
         
         
-          <h1 class="post-title" itemprop="name headline">简书导航栏头像实现</h1>
+          <h1 class="post-title" itemprop="name headline">立个flag</h1>
         
 
         <div class="post-meta">
@@ -325,8 +325,8 @@ s.parentNode.insertBefore(bp, s);
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-31T16:43:10+08:00">
-                2016-05-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-21T10:09:47+08:00">
+                2017-07-21
               </time>
             
 
@@ -348,19 +348,8 @@ s.parentNode.insertBefore(bp, s);
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/tableView/" itemprop="url" rel="index">
-                    <span itemprop="name">tableView</span>
+                  <a href="/categories/闲谈人生/" itemprop="url" rel="index">
+                    <span itemprop="name">闲谈人生</span>
                   </a>
                 </span>
 
@@ -392,7 +381,7 @@ s.parentNode.insertBefore(bp, s);
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  305
+                  368
                 </span>
               
 
@@ -408,7 +397,7 @@ s.parentNode.insertBefore(bp, s);
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -426,19 +415,15 @@ s.parentNode.insertBefore(bp, s);
       
 
       
-        <p>今天看了一下简书的用户界面的导航栏上的头像，于是想了一下其实现过程。</p>
-<p>大家可以到简书客户端上看一下个人界面，可以看到以下几点：</p>
+        <p>最近一直想多写些blog, 但是项目一忙就耽搁下来了, 不扯这些歪理由了, 说白了就是人<strong>变懒了</strong>, 今天立个flag, 自我监督, 以后每月至少一篇质量的总结.</p>
 <blockquote>
-<ol>
-<li>向上移动头像会缩小，但是有下限</li>
-<li>向下移动头像会放大，但是有上限</li>
-<li>头像的起点y始终不变</li>
-</ol>
+<p>「I don’t care if you suck at writing. I don’t care if nobody reads your blog. I don’t care if you have nothing interesting to say.」</p>
 </blockquote>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>首先，我们给导航条添加一个<em>titleView</em>：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">UIView</span> *titleView = [[<span class="built_in">UIView</span> alloc] init];</div><div class="line"><span class="keyword">self</span>.navigationItem.titleView = titleView;</div><div class="line"><span class="keyword">self</span>.headerImageView = [[<span class="built_in">UIImageView</span> alloc] init];</div><div class="line"><span class="keyword">self</span>.headerImageView.layer.cornerRadius = <span class="number">30</span>;</div><div class="line"><span class="keyword">self</span>.headerImageView.layer.masksToBounds = <span class="literal">YES</span>;</div><div class="line"><span class="keyword">self</span>.headerImageView.frame = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">60</span>, <span class="number">60</span>);</div><div class="line"><span class="keyword">self</span>.headerImageView.backgroundColor = [<span class="built_in">UIColor</span> redColor];</div><div class="line"><span class="comment">// 保证用户头像水平居中</span></div><div class="line"><span class="keyword">self</span>.headerImageView.center = <span class="built_in">CGPointMake</span>(titleView.center.x, <span class="number">0</span>);</div><div class="line">[titleView addSubview:<span class="keyword">self</span>.headerImageView];</div></pre></td></tr></table></figure></p>
-<p>接下来最关键的代码就是在滚动时处理缩放用户头像的了：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)scrollViewDidScroll:(<span class="built_in">UIScrollView</span> *)scrollView </div><div class="line">&#123;</div><div class="line">    <span class="built_in">CGFloat</span> offsetY = scrollView.contentOffset.y + scrollView.contentInset.top;</div><div class="line">    <span class="built_in">CGFloat</span> scale = <span class="number">1.0</span>;</div><div class="line">    <span class="comment">// 放大</span></div><div class="line">    <span class="keyword">if</span> (offsetY &lt; <span class="number">0</span>) &#123;</div><div class="line">        scale = MIN(<span class="number">1.5</span>, <span class="number">1</span> - offsetY / <span class="number">300</span>);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (offsetY &gt; <span class="number">0</span>) &#123; </div><div class="line">    <span class="comment">// 缩小</span></div><div class="line">        scale = MAX(<span class="number">0.45</span>, <span class="number">1</span> - offsetY / <span class="number">300</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//进行缩放</span></div><div class="line">    <span class="keyword">self</span>.headerImageView.transform = <span class="built_in">CGAffineTransformMakeScale</span>(scale, scale);</div><div class="line">    <span class="comment">// 保证缩放后y坐标不变</span></div><div class="line">    <span class="built_in">CGRect</span> frame = <span class="keyword">self</span>.headerImageView.frame;</div><div class="line">    frame.origin.y = -<span class="keyword">self</span>.headerImageView.layer.cornerRadius / <span class="number">2</span>;</div><div class="line">    <span class="keyword">self</span>.headerImageView.frame = frame;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>哈，就是如此简单，大家可以自己动手去试一下</p>
-<p><a href="https://github.com/sevnqiao/AVPlayer-" target="_blank" rel="external">gitbub地址</a> 欢迎star</p>
+<p>我不关心你是否擅长写作. 我不关心是不是没人读你的 blog. 我也不在乎你有没有什么有趣的事要说.</p>
+<blockquote>
+<p>「you can’t connect the dots looking forward; you can only connect them looking backwards. So you have to trust that the dots will somehow connect in your future. You have to trust in something — your gut, destiny, life, karma, whatever. Because believing that the dots will connect down the road will give you the confidence to follow your heart. Even when it leads you off the well worn path, and that will make all the difference. (This approach has never let me down, and it has made all the difference in my life.)」</p>
+</blockquote>
+<p>你不能将这些想法和过去联系起来, 但你可以在未来的某天用到它. 所以你要相信这些意想不到的小想法将在未来的某些时候给你惊喜. 你必须相信某些东西——你的直觉、命运、生活等等. 因为相信点点滴滴会连接在一起，会让你有信心跟随自己的心. 即使它引导你走了一条老路，也会让你与众不同。(这种方法从来没有让我失望，它让我的生活变得不同。)</p>
 
       
     </div>
@@ -468,9 +453,7 @@ s.parentNode.insertBefore(bp, s);
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/" rel="tag"># iOS</a>
-          
-            <a href="/tags/tableView/" rel="tag"># tableView</a>
+            <a href="/tags/闲谈人生/" rel="tag"># 闲谈人生</a>
           
         </div>
       
@@ -483,8 +466,8 @@ s.parentNode.insertBefore(bp, s);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/27/cjs1k968z000qwhwdjs437p39/" rel="next" title="网络框架">
-                <i class="fa fa-chevron-left"></i> 网络框架
+              <a href="/2016/09/20/cjs1kj80w000dynwd4lcir2hg/" rel="next" title="如何让Xcode8支持iOS6和iOS7?">
+                <i class="fa fa-chevron-left"></i> 如何让Xcode8支持iOS6和iOS7?
               </a>
             
           </div>
@@ -493,8 +476,8 @@ s.parentNode.insertBefore(bp, s);
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/06/24/cjs1k968r000fwhwd0e5h41ym/" rel="prev" title="文件夹的操作NSFileManager">
-                文件夹的操作NSFileManager <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/21/cjs1kj80m0003ynwd4rz7fw3n/" rel="prev" title="iOS9之前collectionView拖拽重排的实现">
+                iOS9之前collectionView拖拽重排的实现 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -522,8 +505,8 @@ s.parentNode.insertBefore(bp, s);
   <div class="comments" id="comments">
     
         <div id="container"></div>
-        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+        //<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+        //<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
         <script src="https://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
         <script>
         var gitment = new Gitment({
@@ -560,17 +543,8 @@ s.parentNode.insertBefore(bp, s);
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://avatars1.githubusercontent.com/u/13326241?v=3&u=280855f8bfb84fd0ef8e1c385799f0d279084a9a&s=400"
@@ -678,22 +652,6 @@ s.parentNode.insertBefore(bp, s);
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">1.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
