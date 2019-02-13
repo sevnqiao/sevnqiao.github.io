@@ -311,18 +311,19 @@ s.parentNode.insertBefore(bp, s);
         <script src="https://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
         <link rel="stylesheet" href="/lib/gitment/default.css">
         <script type="text/javascript" src="/lib/gitment/gitment.browser.js"></script>
+        <script type="text/javascript" src="/lib/gitment/gitment.browser.js.map"></script>
 
         <script>
-        var gitment = new Gitment.construct({
-          id: md5(window.location.pathname), // 可选。默认为 location.href
-          owner: 'sevnqiao',
-          repo: 'sevnqiao.github.io',
-          oauth: {
-            client_id: '507e5c767620ea423cfe',
-            client_secret: '642a6059c498cf1297d704fd74c6e9517fcd29d8',
-          },
-        })
-        gitment.render('container')
+          var gitment = new Gitment.construct({
+            id: md5(window.location.pathname), // 可选。默认为 location.href
+            owner: 'sevnqiao',
+            repo: 'sevnqiao.github.io',
+            oauth: {
+              client_id: '507e5c767620ea423cfe',
+              client_secret: '642a6059c498cf1297d704fd74c6e9517fcd29d8',
+            },
+          })
+          gitment.render('container')
         </script>
 
     
