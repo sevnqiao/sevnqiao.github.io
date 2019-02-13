@@ -4,6 +4,32 @@
 
     
   <url>
+    <loc>https://sevnqiao.github.io/2016/09/20/%E5%A6%82%E4%BD%95%E8%AE%A9Xcode8%E6%94%AF%E6%8C%81iOS6%E5%92%8CiOS7.html</loc>
+    <lastmod>2019-02-13T02:19:16.289Z</lastmod>
+    <data>
+        <display>
+        <title>如何让Xcode8支持iOS6和iOS7?</title>
+        <pubTime>2016-09-20T08:44:25.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+        <tag>项目实际</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="https://sevnqiao.github.io/categories/iOS/"/>
+          
+             
+              <breadCrumb title="项目实际" url="https://sevnqiao.github.io/categories/iOS/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E9%99%85/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
     <loc>https://sevnqiao.github.io/2017/11/29/wap-%E5%94%A4%E8%B5%B7App-%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8FSchema-Universal-Link.html</loc>
     <lastmod>2019-02-12T07:07:03.947Z</lastmod>
     <data>
@@ -142,31 +168,6 @@
           
              
               <breadCrumb title="runtime" url="https://sevnqiao.github.io/categories/iOS/runtime/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://sevnqiao.github.io/2016/09/20/%E5%A6%82%E4%BD%95%E8%AE%A9Xcode8%E6%94%AF%E6%8C%81iOS6%E5%92%8CiOS7.html</loc>
-    <lastmod>2019-02-12T06:39:28.027Z</lastmod>
-    <data>
-        <display>
-        <title>如何让Xcode8支持iOS6和iOS7?</title>
-        <pubTime>2016-09-20T08:44:25.000Z</pubTime>
-        
-        <tag>iOS</tag>
-         
-        <tag>项目实际</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="https://sevnqiao.github.io/categories/iOS/"/>
-          
-             
-              <breadCrumb title="项目实际" url="https://sevnqiao.github.io/categories/iOS/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E9%99%85/"/>
           
         </display>
     </data>
@@ -317,7 +318,6 @@
     </data>
     </url>
 
-    
     
     
     
