@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS," />
+  <meta name="keywords" content="iOS,tableView," />
 
 
 
@@ -98,19 +98,17 @@
 
 
 
-<meta name="description" content="iOS 开发中一般有系统的UIVisualEffectView处理模糊效果，但是其模糊程度不好控制，很难到达想要的效果。不过我们可以采用 UIViewPropertyAnimator 实现该要求。 1234567891011121314151617181920212223242526- (void)viewDidLoad &amp;#123;    [super viewDidLoad];    self">
-<meta name="keywords" content="iOS">
+<meta name="description" content="前几天在项目中遇到一个需求，实现一个横向的左右滑动翻页进入上一条或下一条详情。刚看到的时候便有了几个想法： 1.pageviewcontroller 2.scoreView像轮播图一样用三个view奶实现 3.横向tableview 经过比较之后选择了第三种方式，原因无其他，重用机制，大量数据不会卡顿。 横向tableview先将tableview左旋转90度：123456789CGFloat f">
+<meta name="keywords" content="iOS,tableView">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用UIViewPropertyAnimator 来控制毛玻璃">
-<meta property="og:url" content="https://sevnqiao.github.io/2018/08/07/cjs1lwkp0000a6nwd6pz8g84s/index.html">
+<meta property="og:title" content="横向tableView">
+<meta property="og:url" content="https://sevnqiao.github.io/2016/01/07/cjs2jgxdl000kmhwdn9gvf4ai/index.html">
 <meta property="og:site_name" content="Sevn">
-<meta property="og:description" content="iOS 开发中一般有系统的UIVisualEffectView处理模糊效果，但是其模糊程度不好控制，很难到达想要的效果。不过我们可以采用 UIViewPropertyAnimator 实现该要求。 1234567891011121314151617181920212223242526- (void)viewDidLoad &amp;#123;    [super viewDidLoad];    self">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1783540-381624f7ee8622f9.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/228">
-<meta property="og:updated_time" content="2019-02-12T06:39:11.612Z">
+<meta property="og:description" content="前几天在项目中遇到一个需求，实现一个横向的左右滑动翻页进入上一条或下一条详情。刚看到的时候便有了几个想法： 1.pageviewcontroller 2.scoreView像轮播图一样用三个view奶实现 3.横向tableview 经过比较之后选择了第三种方式，原因无其他，重用机制，大量数据不会卡顿。 横向tableview先将tableview左旋转90度：123456789CGFloat f">
+<meta property="og:updated_time" content="2019-02-12T06:42:22.787Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用UIViewPropertyAnimator 来控制毛玻璃">
-<meta name="twitter:description" content="iOS 开发中一般有系统的UIVisualEffectView处理模糊效果，但是其模糊程度不好控制，很难到达想要的效果。不过我们可以采用 UIViewPropertyAnimator 实现该要求。 1234567891011121314151617181920212223242526- (void)viewDidLoad &amp;#123;    [super viewDidLoad];    self">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1783540-381624f7ee8622f9.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/228">
+<meta name="twitter:title" content="横向tableView">
+<meta name="twitter:description" content="前几天在项目中遇到一个需求，实现一个横向的左右滑动翻页进入上一条或下一条详情。刚看到的时候便有了几个想法： 1.pageviewcontroller 2.scoreView像轮播图一样用三个view奶实现 3.横向tableview 经过比较之后选择了第三种方式，原因无其他，重用机制，大量数据不会卡顿。 横向tableview先将tableview左旋转90度：123456789CGFloat f">
 
 
 
@@ -138,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="https://sevnqiao.github.io/2018/08/07/cjs1lwkp0000a6nwd6pz8g84s/"/>
+  <link rel="canonical" href="https://sevnqiao.github.io/2016/01/07/cjs2jgxdl000kmhwdn9gvf4ai/"/>
 
 
 
 
 
-  <title>使用UIViewPropertyAnimator 来控制毛玻璃 | Sevn</title>
+  <title>横向tableView | Sevn</title>
   
 
 
@@ -298,7 +296,7 @@ s.parentNode.insertBefore(bp, s);
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2018/08/07/cjs1lwkp0000a6nwd6pz8g84s/">
+    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2016/01/07/cjs2jgxdl000kmhwdn9gvf4ai/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiong.">
@@ -315,7 +313,7 @@ s.parentNode.insertBefore(bp, s);
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用UIViewPropertyAnimator 来控制毛玻璃</h1>
+          <h1 class="post-title" itemprop="name headline">横向tableView</h1>
         
 
         <div class="post-meta">
@@ -327,8 +325,8 @@ s.parentNode.insertBefore(bp, s);
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-07T16:42:36+08:00">
-                2018-08-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-07T16:42:36+08:00">
+                2016-01-07
               </time>
             
 
@@ -352,6 +350,17 @@ s.parentNode.insertBefore(bp, s);
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/iOS/" itemprop="url" rel="index">
                     <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/tableView/" itemprop="url" rel="index">
+                    <span itemprop="name">tableView</span>
                   </a>
                 </span>
 
@@ -383,7 +392,7 @@ s.parentNode.insertBefore(bp, s);
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  151
+                  270
                 </span>
               
 
@@ -417,9 +426,16 @@ s.parentNode.insertBefore(bp, s);
       
 
       
-        <p>iOS 开发中一般有系统的UIVisualEffectView处理模糊效果，但是其模糊程度不好控制，很难到达想要的效果。不过我们可以采用 UIViewPropertyAnimator 实现该要求。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line"></div><div class="line">    <span class="keyword">self</span>.imageView = [[<span class="built_in">UIImageView</span> alloc]initWithFrame:<span class="keyword">self</span>.view.bounds];</div><div class="line">    <span class="keyword">self</span>.imageView.image = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"test.jpg"</span>];</div><div class="line">    <span class="keyword">self</span>.imageView.contentMode = <span class="built_in">UIViewContentModeScaleAspectFill</span>;</div><div class="line">    [<span class="keyword">self</span>.view addSubview:<span class="keyword">self</span>.imageView];</div><div class="line">    </div><div class="line">    <span class="keyword">self</span>.effectView = [[<span class="built_in">UIVisualEffectView</span> alloc]initWithFrame:<span class="keyword">self</span>.view.bounds];</div><div class="line">    <span class="keyword">self</span>.effectView.effect = [<span class="built_in">UIBlurEffect</span> effectWithStyle:<span class="built_in">UIBlurEffectStyleLight</span>];</div><div class="line">    [<span class="keyword">self</span>.view addSubview:<span class="keyword">self</span>.effectView];</div><div class="line">    </div><div class="line">    <span class="keyword">self</span>.animator = [[<span class="built_in">UIViewPropertyAnimator</span> alloc] initWithDuration:<span class="number">0.1</span> curve:<span class="built_in">UIViewAnimationCurveLinear</span> animations:^&#123;</div><div class="line">        <span class="keyword">self</span>.effectView.effect = <span class="literal">nil</span>;</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="built_in">UISlider</span> *slider = [[<span class="built_in">UISlider</span> alloc]initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>, <span class="number">30</span>)];</div><div class="line">    [slider addTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(sliderValueDidChange:) forControlEvents:<span class="built_in">UIControlEventValueChanged</span>];</div><div class="line">    [<span class="keyword">self</span>.view addSubview:slider];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)sliderValueDidChange:(<span class="built_in">UISlider</span> *)slider</div><div class="line">&#123;</div><div class="line">    <span class="keyword">self</span>.animator.fractionComplete = slider.value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>效果如下图所示：<br><img src="https://upload-images.jianshu.io/upload_images/1783540-381624f7ee8622f9.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/228" alt="毛玻璃渐变效果控制.gif"></p>
+        <p>前几天在项目中遇到一个需求，实现一个横向的左右滑动翻页进入上一条或下一条详情。<br>刚看到的时候便有了几个想法：</p>
+<pre><code>1.pageviewcontroller
+2.scoreView像轮播图一样用三个view奶实现
+3.横向tableview
+</code></pre><p>经过比较之后选择了第三种方式，原因无其他，重用机制，大量数据不会卡顿。</p>
+<h2 id="横向tableview"><a href="#横向tableview" class="headerlink" title="横向tableview"></a>横向tableview</h2><p>先将tableview左旋转90度：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">CGFloat</span> f = (kScreen_Height-kNavBar_Height-kScreen_Width)*<span class="number">0.5</span>;</div><div class="line"><span class="keyword">self</span>.myTableView = [[<span class="built_in">UITableView</span> alloc]initWithFrame:<span class="built_in">CGRectMake</span>(-f, f, kScreen_Height-kNavBar_Height, kScreen_Width) style:<span class="built_in">UITableViewStylePlain</span>];</div><div class="line"><span class="keyword">self</span>.myTableView.dataSource = <span class="keyword">self</span>;</div><div class="line"><span class="keyword">self</span>.myTableView.delegate = <span class="keyword">self</span>;</div><div class="line"><span class="keyword">self</span>.myTableView.transform = <span class="built_in">CGAffineTransformMakeRotation</span>(-M_PI/<span class="number">2</span>);</div><div class="line"><span class="keyword">self</span>.myTableView.backgroundColor = kColor_f2f2f2;</div><div class="line"><span class="keyword">self</span>.myTableView.pagingEnabled = <span class="literal">YES</span>;</div><div class="line"><span class="keyword">self</span>.myTableView.showsVerticalScrollIndicator = <span class="literal">NO</span>;</div><div class="line">[<span class="keyword">self</span>.view addSubview:<span class="keyword">self</span>.myTableView];</div></pre></td></tr></table></figure></p>
+<p>要使其旋转之后能刚好和屏幕一致，则<em>tableView</em>的<br>横坐标x为： -（屏幕高度-屏幕宽度）*0.5<br>纵坐标y为：（屏幕高度-屏幕宽度）*0.5<br>改变<em>tableview</em>的<em>transform</em><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">self</span>.myTableView.transform = <span class="built_in">CGAffineTransformMakeRotation</span>(-M_PI/<span class="number">2</span>);</div></pre></td></tr></table></figure></p>
+<p>这样旋转之后刚好和<em>controller</em>的<em>view</em>重合。</p>
+<h3 id="旋转cell"><a href="#旋转cell" class="headerlink" title="旋转cell"></a>旋转cell</h3><p>旋转tableview之后还需要将cell右向旋转90度：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cell.transform = <span class="built_in">CGAffineTransformMakeRotation</span>(M_PI/<span class="number">2</span>);</div></pre></td></tr></table></figure></p>
+<p>这样既可实现一个横向的<em>tableview</em>。</p>
 
       
     </div>
@@ -451,6 +467,8 @@ s.parentNode.insertBefore(bp, s);
           
             <a href="/tags/iOS/" rel="tag"># iOS</a>
           
+            <a href="/tags/tableView/" rel="tag"># tableView</a>
+          
         </div>
       
 
@@ -462,8 +480,8 @@ s.parentNode.insertBefore(bp, s);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/29/cjs1lwkoz00096nwdo9z6xa0d/" rel="next" title="wap 唤起App 的两种方式Schema & Universal Link">
-                <i class="fa fa-chevron-left"></i> wap 唤起App 的两种方式Schema & Universal Link
+              <a href="/2015/12/07/cjs2jgxda0007mhwdjr9n1u4n/" rel="next" title="json去空">
+                <i class="fa fa-chevron-left"></i> json去空
               </a>
             
           </div>
@@ -471,6 +489,10 @@ s.parentNode.insertBefore(bp, s);
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/27/cjs2jgxdo000pmhwdw7myeu0j/" rel="prev" title="网络框架">
+                网络框架 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -537,8 +559,17 @@ s.parentNode.insertBefore(bp, s);
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://avatars1.githubusercontent.com/u/13326241?v=3&u=280855f8bfb84fd0ef8e1c385799f0d279084a9a&s=400"
@@ -646,6 +677,22 @@ s.parentNode.insertBefore(bp, s);
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#横向tableview"><span class="nav-number">1.</span> <span class="nav-text">横向tableview</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转cell"><span class="nav-number">1.1.</span> <span class="nav-text">旋转cell</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

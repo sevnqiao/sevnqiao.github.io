@@ -82,7 +82,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="runtime,iOS," />
+  <meta name="keywords" content="iOS,项目实际," />
 
 
 
@@ -98,17 +98,17 @@
 
 
 
-<meta name="description" content="项目初期，项目经理提出一个需求，如下：  每一个controller要单独管理自己的网络请求操作，在controller销毁的时候要取消掉相应的网络请求。  为了整个项目统一，我们需要在基类中来实现，为了区别我们新建一个基类的category。当然我们需要用一个数组来存放我们的操作，可是category又不能直接添加成员变量，那我们可以直接通过runtime来直接关联一个变量：头文件如下：1234">
-<meta name="keywords" content="runtime,iOS">
+<meta name="description" content="最近好多地方用到了关于文件夹及文件路径的操作,特此总结一下. 获取应用目录系统给我们提供了下面这个方法,该方法可以快速获取相关目录:1FOUNDATION_EXPORT NSArray&amp;lt;NSString *&amp;gt; *NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory directory, NSSearchPathDomainM">
+<meta name="keywords" content="iOS,项目实际">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RunTime添加属性">
-<meta property="og:url" content="https://sevnqiao.github.io/2015/08/07/cjs1lwkoo00016nwdnz4mgtr4/index.html">
+<meta property="og:title" content="文件夹的操作NSFileManager">
+<meta property="og:url" content="https://sevnqiao.github.io/2016/06/24/cjs2jgxdj000imhwd6o9n1812/index.html">
 <meta property="og:site_name" content="Sevn">
-<meta property="og:description" content="项目初期，项目经理提出一个需求，如下：  每一个controller要单独管理自己的网络请求操作，在controller销毁的时候要取消掉相应的网络请求。  为了整个项目统一，我们需要在基类中来实现，为了区别我们新建一个基类的category。当然我们需要用一个数组来存放我们的操作，可是category又不能直接添加成员变量，那我们可以直接通过runtime来直接关联一个变量：头文件如下：1234">
-<meta property="og:updated_time" content="2019-02-12T06:37:36.735Z">
+<meta property="og:description" content="最近好多地方用到了关于文件夹及文件路径的操作,特此总结一下. 获取应用目录系统给我们提供了下面这个方法,该方法可以快速获取相关目录:1FOUNDATION_EXPORT NSArray&amp;lt;NSString *&amp;gt; *NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory directory, NSSearchPathDomainM">
+<meta property="og:updated_time" content="2019-02-12T06:43:17.161Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RunTime添加属性">
-<meta name="twitter:description" content="项目初期，项目经理提出一个需求，如下：  每一个controller要单独管理自己的网络请求操作，在controller销毁的时候要取消掉相应的网络请求。  为了整个项目统一，我们需要在基类中来实现，为了区别我们新建一个基类的category。当然我们需要用一个数组来存放我们的操作，可是category又不能直接添加成员变量，那我们可以直接通过runtime来直接关联一个变量：头文件如下：1234">
+<meta name="twitter:title" content="文件夹的操作NSFileManager">
+<meta name="twitter:description" content="最近好多地方用到了关于文件夹及文件路径的操作,特此总结一下. 获取应用目录系统给我们提供了下面这个方法,该方法可以快速获取相关目录:1FOUNDATION_EXPORT NSArray&amp;lt;NSString *&amp;gt; *NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory directory, NSSearchPathDomainM">
 
 
 
@@ -136,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="https://sevnqiao.github.io/2015/08/07/cjs1lwkoo00016nwdnz4mgtr4/"/>
+  <link rel="canonical" href="https://sevnqiao.github.io/2016/06/24/cjs2jgxdj000imhwd6o9n1812/"/>
 
 
 
 
 
-  <title>RunTime添加属性 | Sevn</title>
+  <title>文件夹的操作NSFileManager | Sevn</title>
   
 
 
@@ -296,7 +296,7 @@ s.parentNode.insertBefore(bp, s);
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2015/08/07/cjs1lwkoo00016nwdnz4mgtr4/">
+    <link itemprop="mainEntityOfPage" href="https://sevnqiao.github.io/2016/06/24/cjs2jgxdj000imhwd6o9n1812/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiong.">
@@ -313,7 +313,7 @@ s.parentNode.insertBefore(bp, s);
 
         
         
-          <h1 class="post-title" itemprop="name headline">RunTime添加属性</h1>
+          <h1 class="post-title" itemprop="name headline">文件夹的操作NSFileManager</h1>
         
 
         <div class="post-meta">
@@ -325,8 +325,8 @@ s.parentNode.insertBefore(bp, s);
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-08-07T19:31:21+08:00">
-                2015-08-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-24T14:23:37+08:00">
+                2016-06-24
               </time>
             
 
@@ -359,8 +359,8 @@ s.parentNode.insertBefore(bp, s);
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/RunTime/" itemprop="url" rel="index">
-                    <span itemprop="name">RunTime</span>
+                  <a href="/categories/iOS/项目实际/" itemprop="url" rel="index">
+                    <span itemprop="name">项目实际</span>
                   </a>
                 </span>
 
@@ -392,7 +392,7 @@ s.parentNode.insertBefore(bp, s);
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  268
+                  429
                 </span>
               
 
@@ -408,7 +408,7 @@ s.parentNode.insertBefore(bp, s);
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -426,13 +426,22 @@ s.parentNode.insertBefore(bp, s);
       
 
       
-        <p>项目初期，项目经理提出一个需求，如下：</p>
+        <p>最近好多地方用到了关于文件夹及文件路径的操作,特此总结一下.</p>
+<h4 id="获取应用目录"><a href="#获取应用目录" class="headerlink" title="获取应用目录"></a>获取应用目录</h4><p>系统给我们提供了下面这个方法,该方法可以快速获取相关目录:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FOUNDATION_EXPORT <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSSearchPathDirectory</span> directory, <span class="built_in">NSSearchPathDomainMask</span> domainMask, <span class="built_in">BOOL</span> expandTilde);</div></pre></td></tr></table></figure></p>
+<p>其中NSSearchPathDirectory字段就是我们要找的文件目录, 这个枚举中我们平时使用较多的是如下三个:</p>
 <blockquote>
-<p>每一个controller要单独管理自己的网络请求操作，在controller销毁的时候要取消掉相应的网络请求。</p>
+<ul>
+<li>NSDocumentDirectory </li>
+<li>NSCachesDirectory</li>
+<li>NSLibraryDirectory</li>
+</ul>
 </blockquote>
-<p>为了整个项目统一，我们需要在基类中来实现，为了区别我们新建一个基类的<em>category</em>。<br>当然我们需要用一个数组来存放我们的操作，可是<em>category</em>又不能直接添加成员变量，那我们可以直接通过<em>runtime</em>来直接关联一个变量：<br>头文件如下：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;UIKit/UIKit.h&gt;</span></span></div><div class="line"><span class="class"><span class="keyword">@class</span> <span class="title">AFHTTPRequestOperation</span>;</span></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">UIViewController</span> (<span class="title">Operation</span>)</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>)<span class="built_in">NSMutableArray</span> *operations;</div><div class="line">-(<span class="keyword">void</span>)addOperation:(AFHTTPRequestOperation *)operation;</div><div class="line">-(<span class="keyword">void</span>)removeOperation:(AFHTTPRequestOperation *)operation;</div><div class="line">-(<span class="keyword">void</span>)cancelAllOperation;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
-<p>具体实现如下：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"UIViewController+Operation.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;objc/runtime.h&gt;</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"XYQApi.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UIViewController</span> (<span class="title">Operation</span>)</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">char</span> kOperationKey;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)setOperations:(<span class="built_in">NSMutableArray</span> *)operations&#123;</div><div class="line">    <span class="keyword">if</span> (!operations) &#123;</div><div class="line">        operations = [[<span class="built_in">NSMutableArray</span> alloc]init];</div><div class="line">        objc_setAssociatedObject(<span class="keyword">self</span>, &amp;kOperationKey, operations, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">-(<span class="built_in">NSMutableArray</span> *)operations</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> objc_getAssociatedObject(<span class="keyword">self</span>, &amp;kOperationKey);</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)addOperation:(AFHTTPRequestOperation *)operation</div><div class="line">&#123;</div><div class="line">    [<span class="keyword">self</span>.operations addObject:operation];</div><div class="line">&#125;</div><div class="line">-(<span class="keyword">void</span>)removeOperation:(AFHTTPRequestOperation *)operation</div><div class="line">&#123;</div><div class="line">    [<span class="keyword">self</span>.operations removeObject:operation];</div><div class="line">&#125;</div><div class="line">-(<span class="keyword">void</span>)cancelAllOperation</div><div class="line">&#123;</div><div class="line">    <span class="keyword">for</span> (AFHTTPRequestOperation * op <span class="keyword">in</span> <span class="keyword">self</span>.operations) &#123;</div><div class="line">        [XYQApi cancelOperation:op];</div><div class="line">    &#125;</div><div class="line">    [<span class="keyword">self</span>.operations removeAllObjects];</div><div class="line">&#125;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
-<p>这样每一个controller都可以单独的管理自己的网络请求操作了</p>
+<p>如获取cache文件夹:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).lastObject;</div></pre></td></tr></table></figure></p>
+<h4 id="创建一个文件夹"><a href="#创建一个文件夹" class="headerlink" title="创建一个文件夹"></a>创建一个文件夹</h4><p> 很多时候我们还要在系统文件夹下面再创建一个新的文件夹.<br>方法如下:<br>// 创建一条路径<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">-(<span class="built_in">NSString</span> *)createFolder:(<span class="built_in">NSString</span> *)folder</div><div class="line">&#123;    </div><div class="line">    <span class="built_in">BOOL</span> isDir = <span class="literal">NO</span>;</div><div class="line">    <span class="built_in">NSFileManager</span> *fileManager = [<span class="built_in">NSFileManager</span> defaultManager];</div><div class="line">    <span class="built_in">BOOL</span> existed = [fileManager fileExistsAtPath:folder isDirectory:&amp;isDir];</div><div class="line">    <span class="keyword">if</span> ( !(isDir == <span class="literal">YES</span> &amp;&amp; existed == <span class="literal">YES</span>) )</div><div class="line">    &#123;</div><div class="line">        [fileManager createDirectoryAtPath:folder withIntermediateDirectories:<span class="literal">YES</span> attributes:<span class="literal">nil</span> error:<span class="literal">nil</span>];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> folder;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="获取某文件夹下所有的文件路径"><a href="#获取某文件夹下所有的文件路径" class="headerlink" title="获取某文件夹下所有的文件路径"></a>获取某文件夹下所有的文件路径</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取存储目录下的所有音频文件</span></div><div class="line">- (<span class="built_in">NSArray</span> *)getLocalFilePathArray:(<span class="built_in">NSString</span> *)filePath</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSMutableArray</span> *filePathArray = [<span class="built_in">NSMutableArray</span> array];</div><div class="line">    </div><div class="line">    <span class="built_in">NSFileManager</span>* manager = [<span class="built_in">NSFileManager</span> defaultManager];</div><div class="line">    <span class="built_in">NSString</span> *filePath = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@/%@"</span>,<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).lastObject, filePath];</div><div class="line">    <span class="built_in">NSEnumerator</span> *childFilesEnumerator = [[manager subpathsAtPath:filePath] objectEnumerator];</div><div class="line">    </div><div class="line">    <span class="built_in">NSString</span>* fileName;</div><div class="line">    <span class="keyword">while</span> ((fileName = [childFilesEnumerator nextObject]) != <span class="literal">nil</span>)&#123;</div><div class="line">        <span class="built_in">NSString</span>* fileAbsolutePath = [filePath stringByAppendingPathComponent:fileName];</div><div class="line">        [filePathArray addObject:fileAbsolutePath];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> filePathArray;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="获取文件夹中单个文件的大小"><a href="#获取文件夹中单个文件的大小" class="headerlink" title="获取文件夹中单个文件的大小"></a>获取文件夹中单个文件的大小</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">long</span> <span class="keyword">long</span>) fileSizeAtPath:(<span class="built_in">NSString</span>*) filePath</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSFileManager</span>* manager = [<span class="built_in">NSFileManager</span> defaultManager];</div><div class="line">    <span class="keyword">if</span> ([manager fileExistsAtPath:filePath])</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> [[manager attributesOfItemAtPath:filePath error:<span class="literal">nil</span>] fileSize];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="获取整个文件夹的大小"><a href="#获取整个文件夹的大小" class="headerlink" title="获取整个文件夹的大小"></a>获取整个文件夹的大小</h4><p>有了上面的获取单个文件大小的方法,我们还可以获取整个文件夹的大小,如下:<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">float</span> ) folderSizeAtPath:(<span class="built_in">NSString</span>*) folderPath</div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSFileManager</span>* manager = [<span class="built_in">NSFileManager</span> defaultManager];</div><div class="line">    <span class="keyword">if</span> (![manager fileExistsAtPath:folderPath]) </div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="built_in">NSEnumerator</span> *childFilesEnumerator = [[manager subpathsAtPath:folderPath] objectEnumerator];</div><div class="line">    <span class="built_in">NSString</span>* fileName;</div><div class="line">    <span class="keyword">long</span> <span class="keyword">long</span> folderSize = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span> ((fileName = [childFilesEnumerator nextObject]) != <span class="literal">nil</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">NSString</span>* fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];</div><div class="line">        folderSize += [<span class="keyword">self</span> fileSizeAtPath:fileAbsolutePath];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> folderSize/(<span class="number">1024.0</span>*<span class="number">1024.0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>目前用到的这么多, 当然还有许多方法未列出来, 欢迎各位同学补充.</p>
 
       
     </div>
@@ -462,9 +471,9 @@ s.parentNode.insertBefore(bp, s);
       
         <div class="post-tags">
           
-            <a href="/tags/runtime/" rel="tag"># runtime</a>
-          
             <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/项目实际/" rel="tag"># 项目实际</a>
           
         </div>
       
@@ -477,8 +486,8 @@ s.parentNode.insertBefore(bp, s);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/05/25/cjs1lwkuv002d6nwdlwprqdga/" rel="next" title="利用runtime解决数组字典的崩溃问题">
-                <i class="fa fa-chevron-left"></i> 利用runtime解决数组字典的崩溃问题
+              <a href="/2016/05/31/cjs2jgxdn000omhwde7uxddoi/" rel="next" title="简书导航栏头像实现">
+                <i class="fa fa-chevron-left"></i> 简书导航栏头像实现
               </a>
             
           </div>
@@ -487,8 +496,8 @@ s.parentNode.insertBefore(bp, s);
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/07/cjs1lwkox00076nwdwpjcx4ww/" rel="prev" title="json去空">
-                json去空 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/09/20/cjs2jgxdf000dmhwd9fw2bsng/" rel="prev" title="如何让Xcode8支持iOS6和iOS7?">
+                如何让Xcode8支持iOS6和iOS7? <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -556,8 +565,17 @@ s.parentNode.insertBefore(bp, s);
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://avatars1.githubusercontent.com/u/13326241?v=3&u=280855f8bfb84fd0ef8e1c385799f0d279084a9a&s=400"
@@ -665,6 +683,22 @@ s.parentNode.insertBefore(bp, s);
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取应用目录"><span class="nav-number">1.</span> <span class="nav-text">获取应用目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建一个文件夹"><span class="nav-number">2.</span> <span class="nav-text">创建一个文件夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取某文件夹下所有的文件路径"><span class="nav-number">3.</span> <span class="nav-text">获取某文件夹下所有的文件路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取文件夹中单个文件的大小"><span class="nav-number">4.</span> <span class="nav-text">获取文件夹中单个文件的大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取整个文件夹的大小"><span class="nav-number">5.</span> <span class="nav-text">获取整个文件夹的大小</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
